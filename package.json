@@ -1,0 +1,30 @@
+{
+  "name": "switching",
+  "version": "1.0.0",
+  "description": "online learning platform",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node backend/server",
+    "server": "nodemon backend/server",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicofraisse/Switching.git"
+  },
+  "author": "Nicolas Fraisse",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nicofraisse/Switching/issues"
+  },
+  "homepage": "https://github.com/nicofraisse/Switching#readme",
+  "devDependencies": {
+    "concurrently": "^5.3.0",
+    "nodemon": "^2.0.6"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0"
+  }
+}

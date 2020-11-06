@@ -31,4 +31,4 @@ const formations = [
   },
 ]
 
-module.exports = formations
+export default formations
