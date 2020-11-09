@@ -15,7 +15,6 @@ const header = () => {
     <div style={headerStyle}>
       <NavLink to='/'>home</NavLink>
       <NavLink to='/about'>about</NavLink>
-      <NavLink to='/contact'>contact</NavLink>
       <NavLink to='/formations'>formations</NavLink>
       <NavLink to='/purchase'>purchase</NavLink>
       <NavLink to='/404'>404</NavLink>

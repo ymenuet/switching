@@ -2,7 +2,7 @@ import React from 'react'
 import { Route, Redirect, Switch } from 'react-router-dom'
 import Home from './pages/Home'
 import About from './pages/About'
-import Contact from './pages/Contact'
+import Contact from './components/ContactForm'
 import Formations from './pages/Formations'
 import Purchase from './pages/Purchase'
 import NotFound from './pages/404'
@@ -17,7 +17,6 @@ function App() {
         <Route path='/' exact component={Home} />
         <Route path='/404' component={NotFound} />
         <Route path='/about' component={About} />
-        <Route path='/contact' component={Contact} />
         <Route path='/formations' component={Formations} />
         <Route path='/purchase' component={Purchase} />
         <Redirect from='/' to='/404' />

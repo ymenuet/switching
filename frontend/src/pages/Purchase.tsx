@@ -4,6 +4,7 @@ const purchase = () => {
   return (
     <div>
       <h1>Je me lance</h1>
+
       <ul>
         <li>All payment pages</li>
         <li>Stripe integration</li>
