@@ -30,7 +30,6 @@ const userSchema = mongoose.Schema(
     },
     avatar: {
       type: String,
-      required: true,
     },
     residentialAdress: {
       address: { type: String, required: true },

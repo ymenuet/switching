@@ -8,7 +8,9 @@
     "start": "node backend/server",
     "server": "nodemon backend/server",
     "client": "npm start --prefix frontend",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "db:import": "node backend/seed",
+    "db:destroy": "node backend/seed -d"
   },
   "repository": {
     "type": "git",
@@ -25,8 +27,10 @@
     "nodemon": "^2.0.6"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "colors": "^1.4.0",
     "dotenv": "^8.2.0",
+    "express-async-handler": "^1.1.4",
     "mongoose": "^5.10.13"
   }
 }

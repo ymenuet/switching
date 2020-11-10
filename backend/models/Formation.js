@@ -13,7 +13,6 @@ const formationSchema = mongoose.Schema(
     longDescription: {
       type: String,
       required: true,
-      default: false,
     },
     logo: {
       type: String,
@@ -47,6 +46,6 @@ const formationSchema = mongoose.Schema(
 
 // Timestamps give us created_at and updated_at fields automatically
 
-const User = mongoose.model('Formation', formationSchema)
+const Formation = mongoose.model('Formation', formationSchema)
 
 export default Formation
