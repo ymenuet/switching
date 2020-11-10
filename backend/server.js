@@ -4,6 +4,7 @@ import colors from 'colors'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 import connectDB from './config/db.js'
 import formationRoutes from './routes/formationRoutes.js'
+import userRoutes from './routes/userRoutes.js'
 // import { errorMonitor } from 'nodemailer/lib/mailer'
 
 dotenv.config()
@@ -11,6 +12,8 @@ dotenv.config()
 connectDB()
 
 const app = express()
+
+app.use(express.json())
 
 app.get('/', (req, res) => {
   res.send('API running')
@@ -23,6 +26,7 @@ app.use((req, res, next) => {
 })
 
 app.use('/api/formations', formationRoutes)
+app.use('/api/users', userRoutes)
 
 app.use(notFound)
 

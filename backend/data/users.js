@@ -8,7 +8,7 @@ const users = [
     firstName: 'Admin',
     lastName: 'Smith',
     birthDate: new Date(),
-    residentialAdress: {
+    residentialAddress: {
       address: '10 rue des pommes',
       city: 'Paris',
       postalCode: '63500',
@@ -22,7 +22,7 @@ const users = [
     firstName: 'John',
     lastName: 'Doe',
     birthDate: new Date(),
-    residentialAdress: {
+    residentialAddress: {
       address: '8 rue des bananes',
       city: 'Paris',
       postalCode: '77490',
@@ -36,7 +36,7 @@ const users = [
     firstName: 'Jane',
     lastName: 'Smith',
     birthDate: new Date(),
-    residentialAdress: {
+    residentialAddress: {
       address: '35 rue des cerises',
       city: 'Paris',
       postalCode: '33290',
