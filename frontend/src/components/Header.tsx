@@ -15,9 +15,7 @@ const header = () => {
     <div style={headerStyle}>
       <NavLink to='/'>home</NavLink>
       <NavLink to='/about'>about</NavLink>
-      <NavLink to='/formations' exact>
-        formations
-      </NavLink>
+      <NavLink to='/formations'>formations</NavLink>
       <NavLink to='/purchase'>purchase</NavLink>
       <NavLink to='/404'>404</NavLink>
       <NavLink to='/login'>Login</NavLink>
