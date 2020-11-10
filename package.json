@@ -9,8 +9,9 @@
     "server": "nodemon backend/server",
     "client": "npm start --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "db:import": "node backend/seed",
-    "db:destroy": "node backend/seed -d"
+    "db:import": "node backend/seed -i",
+    "db:destroy": "node backend/seed -d",
+    "db:seed": "node backend/seed -s"
   },
   "repository": {
     "type": "git",

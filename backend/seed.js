@@ -13,7 +13,7 @@ dotenv.config()
 
 connectDB()
 
-const importData = async () => {
+const importData = async (doNotExit = false) => {
   try {
     await Video.deleteMany()
     await Formation.deleteMany()
@@ -25,14 +25,14 @@ const importData = async () => {
     })
     await Formation.insertMany(sampleFormations)
     console.log('Data imported!'.green.inverse)
-    process.exit()
+    process.exit(0)
   } catch (err) {
     console.log(`Error: ${err.message}`.red.inverse)
     process.exit(1)
   }
 }
 
-const destroyData = async () => {
+const destroyData = async (doNotExit = false) => {
   try {
     await Video.deleteMany()
     await Formation.deleteMany()
@@ -40,7 +40,9 @@ const destroyData = async () => {
     await User.deleteMany()
 
     console.log('Data destroyed!'.blue.inverse)
-    process.exit()
+    if (!doNotExit) {
+      process.exit(0)
+    }
   } catch (error) {
     console.log(`Error: ${err.message}`.red.inverse)
     process.exit(1)
@@ -49,6 +51,9 @@ const destroyData = async () => {
 
 if (process.argv[2] === '-d') {
   destroyData()
-} else {
+} else if (process.argv[2] === '-i') {
   importData()
+} else if (process.argv[2] === '-s') {
+  await destroyData(true)
+  await importData()
 }
