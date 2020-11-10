@@ -16,9 +16,16 @@ app.get('/', (req, res) => {
   res.send('API running')
 })
 
+// to provent CORS Error — Access-Control-Allow-Origin
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*')
+  next()
+})
+
 app.use('/api/formations', formationRoutes)
 
 app.use(notFound)
+
 app.use(errorHandler)
 
 const PORT = process.env.PORT || 5000

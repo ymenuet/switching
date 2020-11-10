@@ -1,15 +1,19 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { ImportsNotUsedAsValues } from 'typescript'
+import { listFormations } from '../actions/formationActions.js'
 
 const Formations = () => {
-  const [formations, setFormations] = useState([])
+  const dispatch = useDispatch()
+
+  const formationList = useSelector((state: any) => state.formationList)
+  const { loading, error, formations } = formationList
   useEffect(() => {
-    const fetchFormations = async () => {
-      const { data } = await axios.get('/api/formations')
-      setFormations(data)
-    }
-    fetchFormations()
-  }, [])
+    dispatch(listFormations())
+  }, [dispatch])
+
+  // const formations: string[] = []
+
   return (
     <>
       <h1>formations</h1>
@@ -17,7 +21,13 @@ const Formations = () => {
         <li>Fetch courses from mongoDB (only promotional stuff)</li>
         <li>Ability to view individual formation (popup or fake page)</li>
       </ul>
-      <p>{JSON.stringify(formations)}</p>
+      {loading ? (
+        <h1>Loading</h1>
+      ) : error ? (
+        <h3>Error</h3>
+      ) : (
+        <p>{JSON.stringify(formations)}</p>
+      )}
     </>
   )
 }
