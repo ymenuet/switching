@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { ImportsNotUsedAsValues } from 'typescript'
 import { listFormations } from '../actions/formationActions.js'
+import { Link } from 'react-router-dom'
 
 const Formations = () => {
   const dispatch = useDispatch()
@@ -26,7 +26,19 @@ const Formations = () => {
       ) : error ? (
         <h3>Error</h3>
       ) : (
-        <p>{JSON.stringify(formations)}</p>
+        <p>
+          {formations.map((formation: any) => {
+            return (
+              <div>
+                <h3>{formation.title}</h3>
+                <p>{formation.shortDescription}</p>
+                <p>{formation.difficulty}</p>
+                <p>{formation.price}</p>
+                <Link to='/purchase'>Je me lance</Link>
+              </div>
+            )
+          })}
+        </p>
       )}
     </>
   )

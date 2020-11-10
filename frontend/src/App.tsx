@@ -17,7 +17,7 @@ function App() {
         <Route path='/' exact component={Home} />
         <Route path='/404' component={NotFound} />
         <Route path='/about' component={About} />
-        <Route path='/formations' component={Formations} />
+        <Route path='/formations' exact component={Formations} />
         <Route path='/purchase' component={Purchase} />
         <Redirect from='/' to='/404' />
       </Switch>
