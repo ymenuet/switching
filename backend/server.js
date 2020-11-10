@@ -1,8 +1,10 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import colors from 'colors'
+import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 import connectDB from './config/db.js'
-import formations from './data/formations.js'
+import formationRoutes from './routes/formationRoutes.js'
+// import { errorMonitor } from 'nodemailer/lib/mailer'
 
 dotenv.config()
 
@@ -14,14 +16,10 @@ app.get('/', (req, res) => {
   res.send('API running')
 })
 
-app.get('/api/formations', (req, res) => {
-  res.json(formations)
-})
+app.use('/api/formations', formationRoutes)
 
-app.get('/api/formations/:id', (req, res) => {
-  const formation = formations.find((f) => f.id == req.params.id)
-  res.json(formation)
-})
+app.use(notFound)
+app.use(errorHandler)
 
 const PORT = process.env.PORT || 5000
 
