@@ -45,6 +45,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
       phoneNumber: user.phoneNumber,
     })
   } else {
+    res.status(404)
     throw new Error('user not found')
   }
 })
@@ -100,4 +101,43 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 })
 
-export { authUser, registerUser, getUserProfile }
+// @desc      Update user profile
+// @route     PUT api/users/profile
+// @access    Private
+const updateUserProfile = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id)
+  if (user) {
+    user.firstName = req.body.firstName || user.firstName
+    user.lastName = req.body.lastName || user.lastName
+    user.birthDate = req.body.birthDate || user.birthDate
+    user.avatar = req.body.avatar || user.avatar
+    user.residentialAddress =
+      req.body.residentialAddress || user.residentialAddress
+    user.phoneNumber = req.body.phoneNumber || user.phoneNumber
+    user.email = req.body.email || user.email
+    if (req.body.password) {
+      user.password = req.body.password
+    }
+    const updatedUser = await user.save()
+
+    res.json({
+      _id: updatedUser._id,
+      email: updatedUser.email,
+      isAdmin: updatedUser.isAdmin,
+      firstName: updatedUser.firstName,
+      lastName: updatedUser.email,
+      birthDate: updatedUser.birthDate,
+      avatar: updatedUser.avatar,
+      residentialAddress: updatedUser.residentialAddress,
+      phoneNumber: updatedUser.phoneNumber,
+      token: generateToken(updatedUser._id),
+    })
+    console.log(user)
+    console.log(updatedUser)
+  } else {
+    res.status(404)
+    throw new Error('user not found')
+  }
+})
+
+export { authUser, registerUser, getUserProfile, updateUserProfile }
