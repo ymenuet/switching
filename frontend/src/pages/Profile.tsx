@@ -56,9 +56,7 @@ const Profile = (props: any) => {
     e.preventDefault()
     if (password !== confirmPassword) {
       setMessage('Passwords do not match')
-      console.log('BAD PASSWORD MATCH')
     } else {
-      console.log('DISPATCHING')
       dispatch(
         updateUserProfile({
           id: user._id,
