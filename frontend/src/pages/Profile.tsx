@@ -30,8 +30,6 @@ const Profile = (props: any) => {
 
   const userUpdateProfile = useSelector((state: any) => state.userUpdateProfile)
   const { success } = userUpdateProfile
-  console.log('updateprofile', userUpdateProfile)
-  console.log('success', success)
 
   useEffect(() => {
     // If user isnn't logged in
