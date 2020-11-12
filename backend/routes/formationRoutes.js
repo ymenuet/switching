@@ -3,7 +3,7 @@ const router = express.Router()
 import {
   getFormations,
   getFormationById,
-} from '../controllers/formationController.js'
+} from '../controllers/formationsController.js'
 
 router.route('/').get(getFormations)
 router.route('/:id').get(getFormationById)

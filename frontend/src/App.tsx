@@ -6,6 +6,7 @@ import Formations from './pages/Formations'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Profile from './pages/Profile'
+import UserList from './pages/UserList'
 import Purchase from './pages/Purchase'
 import NotFound from './pages/404'
 import Header from './components/Header'
@@ -20,6 +21,7 @@ function App() {
         <Route path='/login' component={Login} />
         <Route path='/register' component={Register} />
         <Route path='/profile' component={Profile} />
+        <Route path='/admin/user-list' component={UserList} />
         <Route path='/404' component={NotFound} />
         <Route path='/about' component={About} />
         <Route path='/formations' exact component={Formations} />

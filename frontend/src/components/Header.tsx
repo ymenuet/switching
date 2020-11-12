@@ -27,6 +27,7 @@ const Header = () => {
       <NavLink to='/formations'>formations</NavLink>
       <NavLink to='/register '>register</NavLink>
       <NavLink to='/purchase'>purchase</NavLink>
+      <NavLink to='/admin/user-list'>purchase</NavLink>
       <NavLink to='/404'>404</NavLink>
       {userInfo ? (
         <>
@@ -35,6 +36,12 @@ const Header = () => {
         </>
       ) : (
         <NavLink to='/login'>Login</NavLink>
+      )}
+      {userInfo?.isAdmin && (
+        <>
+          <NavLink to='/admin/user-list'>Users</NavLink>
+          <NavLink to='/formations'>Formations</NavLink>
+        </>
       )}
     </div>
   )

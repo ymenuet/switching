@@ -132,12 +132,90 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       phoneNumber: updatedUser.phoneNumber,
       token: generateToken(updatedUser._id),
     })
-    console.log(user)
-    console.log(updatedUser)
   } else {
     res.status(404)
     throw new Error('user not found')
   }
 })
 
-export { authUser, registerUser, getUserProfile, updateUserProfile }
+// @desc      Get all users
+// @route     GET api/users
+// @access    Private/admin
+const getUsers = asyncHandler(async (req, res) => {
+  const users = await User.find({})
+  res.json(users)
+})
+
+// @desc      Delete user
+// @route     DELETE api/users/:id
+// @access    Private/admin
+const deleteUser = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id)
+  if (user) {
+    await user.remove()
+    res.json({ message: 'User removed' })
+  } else {
+    res.status(404)
+    throw new Error('User not found')
+  }
+})
+
+// @desc      Get user by id
+// @route     GET api/users/:id
+// @access    Private/admin
+const getUserById = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id).select('-password')
+  if (user) {
+    res.json(user)
+  } else {
+    res.status(404)
+    throw new Error('User not found')
+  }
+})
+
+// @desc      Update user
+// @route     PUT api/users/:id
+// @access    Private/Admin
+const updateUser = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id)
+  if (user) {
+    user.isAdmin = req.body.isAdmin || user.isAdmin
+
+    user.firstName = req.body.firstName || user.firstName
+    user.lastName = req.body.lastName || user.lastName
+    user.birthDate = req.body.birthDate || user.birthDate
+    user.avatar = req.body.avatar || user.avatar
+    user.residentialAddress =
+      req.body.residentialAddress || user.residentialAddress
+    user.phoneNumber = req.body.phoneNumber || user.phoneNumber
+    user.email = req.body.email || user.email
+
+    const updatedUser = await user.save()
+
+    res.json({
+      _id: updatedUser._id,
+      email: updatedUser.email,
+      isAdmin: updatedUser.isAdmin,
+      firstName: updatedUser.firstName,
+      lastName: updatedUser.lastName,
+      birthDate: updatedUser.birthDate,
+      avatar: updatedUser.avatar,
+      residentialAddress: updatedUser.residentialAddress,
+      phoneNumber: updatedUser.phoneNumber,
+    })
+  } else {
+    res.status(404)
+    throw new Error('user not found')
+  }
+})
+
+export {
+  authUser,
+  registerUser,
+  getUserProfile,
+  updateUserProfile,
+  getUsers,
+  deleteUser,
+  getUserById,
+  updateUser,
+}
