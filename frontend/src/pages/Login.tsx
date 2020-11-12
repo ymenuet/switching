@@ -16,8 +16,6 @@ const Login = (props: any) => {
     : '/'
   const submitHandler = (e: any) => {
     e.preventDefault()
-    console.log('submit')
-    console.log(email, password)
     dispatch(login(email, password))
   }
 

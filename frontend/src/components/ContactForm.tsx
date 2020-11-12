@@ -3,7 +3,6 @@ import React from 'react'
 const contact = () => {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault()
-    console.log('hi')
   }
   return (
     <div>
