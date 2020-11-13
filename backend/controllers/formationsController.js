@@ -23,4 +23,30 @@ const getFormationById = asyncHandler(async (req, res) => {
   throw new Error('Formation not found')
 })
 
-export { getFormations, getFormationById }
+// @desc      Create formation
+// @route     POST /api/formations
+// @access    Private/admin
+const createFormation = asyncHandler(async (req, res) => {
+  if (mongoose.Types.ObjectId.isValid(req.params.id)) {
+    const formation = await Formation.findById(req.params.id)
+    if (formation) return res.json(formation)
+  }
+  res.status(404)
+  throw new Error('Formation not found')
+})
+
+// @desc      Delete formation
+// @route     GET /api/formation/id
+// @access    Private/admin
+const deleteFormation = asyncHandler(async (req, res) => {
+  const formation = await Formation.findById(req.params.id)
+  if (formation) {
+    await formation.remove()
+    res.json({ message: 'Formation removed' })
+  } else {
+    res.status(404)
+    throw new Error('Formation not found')
+  }
+})
+
+export { getFormations, getFormationById, deleteFormation, createFormation }

@@ -8,6 +8,7 @@ import Register from './pages/Register'
 import Profile from './pages/Profile'
 import UserList from './pages/UserList'
 import UserEdit from './pages/UserEdit'
+import FormationsAdmin from './pages/FormationsAdmin'
 import Purchase from './pages/Purchase'
 import NotFound from './pages/404'
 import Header from './components/Header'
@@ -22,6 +23,7 @@ function App() {
         <Route path='/login' component={Login} />
         <Route path='/register' component={Register} />
         <Route path='/profile' component={Profile} />
+        <Route path='/admin/formation-list' component={FormationsAdmin} />
         <Route path='/admin/user-list' component={UserList} />
         <Route path='/admin/users/:id/edit' component={UserEdit} />
         <Route path='/404' component={NotFound} />
