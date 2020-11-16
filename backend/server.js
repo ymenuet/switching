@@ -1,10 +1,12 @@
 import express from 'express'
 import dotenv from 'dotenv'
+import path from 'path'
 import colors from 'colors'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 import connectDB from './config/db.js'
 import formationRoutes from './routes/formationRoutes.js'
 import userRoutes from './routes/userRoutes.js'
+import uploadRoutes from './routes/uploadRoutes.js'
 // import { errorMonitor } from 'nodemailer/lib/mailer'
 
 dotenv.config()
@@ -31,10 +33,12 @@ app.use((req, res, next) => {
 })
 
 app.use('/api/formations', formationRoutes)
+app.use('/api/upload', uploadRoutes)
 app.use('/api/users', userRoutes)
 
+const __dirname = path.resolve()
+app.use('/upload', express.static(path.join(__dirname, '/uploads')))
 app.use(notFound)
-
 app.use(errorHandler)
 
 const PORT = process.env.PORT || 5000

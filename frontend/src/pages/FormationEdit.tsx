@@ -7,6 +7,7 @@ import {
 } from '../actions/formationActions'
 import FormContainer from './FormContainer'
 import { FORMATION_UPDATE_RESET } from '../constants/formationConstants'
+import axios from 'axios'
 // import { FORMATION_UPDATE_RESET } from '../constants/formationConstants'
 
 const FormationEdit = (props: any) => {
@@ -21,6 +22,7 @@ const FormationEdit = (props: any) => {
   const [demoVideo, setDemoVideo] = useState('')
   const [price, setPrice] = useState(0)
   const [difficulty, setDifficulty] = useState(2)
+  const [uploading, setUploading] = useState(false)
 
   const dispatch = useDispatch()
 
@@ -80,6 +82,25 @@ const FormationEdit = (props: any) => {
     )
   }
 
+  const uploadFileHandler = async (e: any) => {
+    const file = e.target.files[0]
+    const formData = new FormData()
+    formData.append('image', file)
+    setUploading(true)
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+      const { data } = await axios.post('/api/upload', formData, config)
+      setLogo(data)
+      setUploading(false)
+    } catch (err) {
+      setUploading(false)
+    }
+  }
+
   return (
     <>
       <Link to='/admin/formation-list'>Go back</Link>
@@ -124,6 +145,15 @@ const FormationEdit = (props: any) => {
               value={logo}
               onChange={(e) => setLogo(e.target.value)}
             />
+            <label>Select a file:</label>
+            <input
+              type='file'
+              id='logo-file'
+              // custom
+              onChange={uploadFileHandler}
+            ></input>
+            {uploading && <p>Uploading...</p>}
+
             <label htmlFor=''>Background Image</label>
             <input
               type='text'
