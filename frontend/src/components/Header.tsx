@@ -40,7 +40,7 @@ const Header = () => {
       {userInfo?.isAdmin && (
         <>
           <NavLink to='/admin/user-list'>Users</NavLink>
-          <NavLink to='/formations'>Formations</NavLink>
+          <NavLink to='/admin/formation-list'>Formations</NavLink>
         </>
       )}
     </div>

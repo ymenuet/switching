@@ -1,6 +1,11 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { listFormations } from '../actions/formationActions'
+import {
+  listFormations,
+  deleteFormation,
+  createFormation,
+} from '../actions/formationActions'
+import { FORMATION_CREATE_RESET } from '../constants/formationConstants'
 import { Link } from 'react-router-dom'
 
 const FormationList = (props: any) => {
@@ -12,30 +17,59 @@ const FormationList = (props: any) => {
   const userLogin = useSelector((state: any) => state.userLogin)
   const { userInfo } = userLogin
 
+  const formationDelete = useSelector((state: any) => state.formationDelete)
+  const {
+    loading: loadingDelete,
+    error: errorDelete,
+    success: successDelete,
+  } = formationDelete
+
+  const formationCreate = useSelector((state: any) => state.formationCreate)
+  const {
+    loading: loadingCreate,
+    error: errorCreate,
+    success: successCreate,
+    formation: createdFormation,
+  } = formationCreate
+
   useEffect(() => {
-    if (userInfo?.isAdmin) {
-      dispatch(listFormations())
-    } else {
+    dispatch({ type: FORMATION_CREATE_RESET })
+    if (!userInfo.isAdmin) {
       props.history.push('/login')
     }
-    dispatch(listFormations())
-  }, [dispatch, props.history, userInfo])
+
+    if (successCreate) {
+      props.history.push(`/admin/formations/${createdFormation._id}/edit`)
+    } else {
+      dispatch(listFormations())
+    }
+  }, [
+    dispatch,
+    props.history,
+    userInfo,
+    successDelete,
+    successCreate,
+    createdFormation,
+  ])
 
   const deleteHandler = (id: any) => {
     if (window.confirm('Are you sure?')) {
-      // DELETE FORMATION
+      dispatch(deleteFormation(id))
     }
   }
 
   const createFormationHandler = () => {
-    console.log('creating formation')
+    dispatch(createFormation())
   }
 
   return (
     <>
       <h1>Formations</h1>
       <button onClick={createFormationHandler}>Create a formation</button>
-
+      {loadingDelete && <p>Loading Delete</p>}
+      {errorDelete && <p>{errorDelete}</p>}
+      {loadingCreate && <p>Loading Create</p>}
+      {errorCreate && <p>{errorCreate}</p>}
       {loading ? (
         <h2>Loading</h2>
       ) : error ? (
