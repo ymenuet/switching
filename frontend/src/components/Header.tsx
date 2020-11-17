@@ -2,6 +2,8 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../actions/userActions'
+import Logo from '../images/logo-text.png'
+import classes from './Header.module.css'
 
 const headerStyle = {
   width: '100vw',
@@ -21,28 +23,29 @@ const Header = () => {
   }
 
   return (
-    <div style={headerStyle}>
-      <NavLink to='/'>home</NavLink>
-      <NavLink to='/about'>about</NavLink>
-      <NavLink to='/formations'>formations</NavLink>
-      <NavLink to='/register '>register</NavLink>
-      <NavLink to='/purchase'>purchase</NavLink>
-      <NavLink to='/admin/user-list'>purchase</NavLink>
-      <NavLink to='/404'>404</NavLink>
-      {userInfo ? (
-        <>
-          <NavLink to='/profile'>Profile</NavLink>
-          <p onClick={logoutHandler}>Logout</p>
-        </>
-      ) : (
-        <NavLink to='/login'>Login</NavLink>
-      )}
-      {userInfo?.isAdmin && (
-        <>
-          <NavLink to='/admin/user-list'>Users</NavLink>
-          <NavLink to='/admin/formation-list'>Formations</NavLink>
-        </>
-      )}
+    <div className={classes.NavBar}>
+      <NavLink to='/'>
+        <img src={Logo} alt='Logo' className={classes.NavLogo} />
+      </NavLink>
+      <div className={classes.NavLinks}>
+        <NavLink to='/formations'>formations</NavLink>
+        <NavLink to='/purchase'>je me lance</NavLink>
+        <NavLink to='/register'>s'inscrire</NavLink>
+        {userInfo ? (
+          <>
+            <NavLink to='/profile'>Mon profil</NavLink>
+            <p onClick={logoutHandler}>déconnexion</p>
+          </>
+        ) : (
+          <NavLink to='/login'>connexion</NavLink>
+        )}
+        {userInfo?.isAdmin && (
+          <>
+            <NavLink to='/admin/user-list'>Utilisateurs</NavLink>
+            <NavLink to='/admin/formation-list'>Formations</NavLink>
+          </>
+        )}
+      </div>
     </div>
   )
 }

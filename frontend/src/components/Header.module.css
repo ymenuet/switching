@@ -1,0 +1,17 @@
+.NavBar {
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 32px;
+}
+
+.NavLogo {
+  width: 180px;
+}
+
+.NavLinks a {
+  text-decoration: none;
+  margin: 0 16px;
+  text-transform: uppercase;
+}

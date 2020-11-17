@@ -2,6 +2,29 @@ body {
   margin: 0;
 }
 
-* {
+p,
+h1,
+h2,
+h3,
+h3,
+h5,
+h6,
+li,
+input,
+label,
+span,
+a {
   box-sizing: border-box;
+  font-family: 'Avenir';
+  color: #2b3142;
+}
+
+a {
+  text-decoration: none;
+  /* color: #2b3142; */
+  transition: 0.1s;
+}
+
+a:hover {
+  color: #53b7ba !important;
 }

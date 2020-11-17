@@ -15,26 +15,29 @@ import Purchase from './pages/Purchase'
 import NotFound from './pages/404'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import Container from './components/Container'
 
 function App() {
   return (
     <div>
       <Header />
       <Switch>
-        <Route path='/' exact component={Home} />
-        <Route path='/login' component={Login} />
-        <Route path='/register' component={Register} />
-        <Route path='/profile' component={Profile} />
-        <Route path='/admin/formation-list' component={FormationsAdmin} />
-        <Route path='/admin/formations/:id/edit' component={FormationEdit} />
-        <Route path='/admin/user-list' component={UserList} />
-        <Route path='/admin/users/:id/edit' component={UserEdit} />
-        <Route path='/404' component={NotFound} />
-        <Route path='/about' component={About} />
-        <Route path='/formations' exact component={Formations} />
-        <Route path='/formations/:id' component={Formation} />
-        <Route path='/purchase' component={Purchase} />
-        <Redirect from='/' to='/404' />
+        <Container>
+          <Route path='/' exact component={Home} />
+          <Route path='/login' component={Login} />
+          <Route path='/register' component={Register} />
+          <Route path='/profile' component={Profile} />
+          <Route path='/admin/formation-list' component={FormationsAdmin} />
+          <Route path='/admin/formations/:id/edit' component={FormationEdit} />
+          <Route path='/admin/user-list' component={UserList} />
+          <Route path='/admin/users/:id/edit' component={UserEdit} />
+          <Route path='/404' component={NotFound} />
+          <Route path='/about' component={About} />
+          <Route path='/formations' exact component={Formations} />
+          <Route path='/formations/:id' component={Formation} />
+          <Route path='/purchase' component={Purchase} />
+          <Redirect from='/' to='/404' />
+        </Container>
       </Switch>
       <Footer />
     </div>

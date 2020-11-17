@@ -1,0 +1,39 @@
+.FormContainer {
+  width: 300px;
+  margin: 0 auto;
+}
+
+.FormContainer form input,
+form label {
+  display: block;
+  width: 300px;
+  margin: 4px auto;
+}
+
+.FormContainer form input,
+.FormContainer form input:active {
+  border: 2px solid #2b3142;
+  padding: 8px;
+  border-radius: 0px;
+  font-size: 15px;
+}
+
+.FormContainer div {
+  margin: 0 auto 16px auto;
+}
+
+.FormContainer button {
+  background-color: #2b3142;
+  padding: 12px 24px;
+  font-size: 18px;
+  color: white;
+  font-weight: bold;
+  outline: none;
+  border: none;
+  transition: 0.1s;
+}
+
+.FormContainer button:hover {
+  cursor: pointer;
+  background-color: #53b7ba;
+}

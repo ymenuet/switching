@@ -30,25 +30,30 @@ const Login = (props: any) => {
       {error && <p>{JSON.stringify(error)}</p>}
       {loading && <p>Loading</p>}
       <form onSubmit={submitHandler}>
-        <label htmlFor=''>Email Address</label>
-        <input
-          type='email'
-          placeholder='Enter email'
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <label htmlFor=''>Password</label>
-        <input
-          type='password'
-          placeholder='Enter password'
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        <div>
+          <label htmlFor=''>Email Address</label>
+          <input
+            type='email'
+            placeholder='Enter email'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+
+        <div>
+          <label htmlFor=''>Password</label>
+          <input
+            type='password'
+            placeholder='Enter password'
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
         <button type='submit'>Sign In</button>
         <p>
           New customer?{' '}
           <Link to={redirect ? `/register/redirect=${redirect}` : '/register'}>
-            Register
+            <strong>Register</strong>
           </Link>
         </p>
       </form>
