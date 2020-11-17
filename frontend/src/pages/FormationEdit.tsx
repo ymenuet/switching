@@ -22,7 +22,9 @@ const FormationEdit = (props: any) => {
   const [demoVideo, setDemoVideo] = useState('')
   const [price, setPrice] = useState(0)
   const [difficulty, setDifficulty] = useState(2)
-  const [uploading, setUploading] = useState(false)
+  const [logoUploading, setLogoUploading] = useState(false)
+  const [bgImageUploading, setBgImageUploading] = useState(false)
+  const [thumbnailUploading, setThumbnailUploading] = useState(false)
 
   const dispatch = useDispatch()
 
@@ -48,6 +50,8 @@ const FormationEdit = (props: any) => {
         setShortDescription(formation.shortDescription)
         setLongDescription(formation.longDescription)
         setLogo(formation.logo)
+        setBackgroundImage(formation.backgroundImage)
+        setThumbnailUploading(formation.thumbnail)
         setBackgroundImage(formation.backgroundImage)
         setThumbnail(formation.thumbnail)
         setDemoVideo(formation.demoVideo)
@@ -84,24 +88,46 @@ const FormationEdit = (props: any) => {
 
   const uploadFileHandler = async (e: any) => {
     const file = e.target.files[0]
+    const imgKind = e.target.id
     const formData = new FormData()
     formData.append('image', file)
 
-    setUploading(true)
+    switch (imgKind) {
+      case 'logo-file':
+        setLogoUploading(true)
+        break
+      case 'background-image-file':
+        setBgImageUploading(true)
+        break
+      case 'thumbnail-file':
+        setThumbnailUploading(true)
+    }
     try {
       const config = {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       }
-      console.log('starting')
       const { data } = await axios.post('/api/upload', formData, config)
-      console.log('ok done')
-      setLogo(data)
-      setUploading(false)
+
+      switch (imgKind) {
+        case 'logo-file':
+          setLogo(data)
+          setLogoUploading(false)
+          break
+        case 'background-image-file':
+          setBackgroundImage(data)
+          setBgImageUploading(false)
+          break
+        case 'thumbnail-file':
+          setThumbnail(data)
+          setThumbnailUploading(false)
+      }
     } catch (err) {
       console.log(err)
-      setUploading(false)
+      setLogoUploading(false)
+      setBgImageUploading(false)
+      setThumbnailUploading(false)
     }
   }
 
@@ -156,7 +182,7 @@ const FormationEdit = (props: any) => {
               // custom
               onChange={uploadFileHandler}
             ></input>
-            {uploading && <p>Uploading...</p>}
+            {logoUploading && <p>Uploading...</p>}
 
             <label htmlFor=''>Background Image</label>
             <input
@@ -166,6 +192,15 @@ const FormationEdit = (props: any) => {
               onChange={(e) => setBackgroundImage(e.target.value)}
             />
 
+            <label>Select a file:</label>
+            <input
+              type='file'
+              id='background-image-file'
+              // custom
+              onChange={uploadFileHandler}
+            ></input>
+            {bgImageUploading && <p>Uploading...</p>}
+
             <label htmlFor=''>Thumbnail</label>
             <input
               type='text'
@@ -173,6 +208,15 @@ const FormationEdit = (props: any) => {
               value={thumbnail}
               onChange={(e) => setThumbnail(e.target.value)}
             />
+
+            <label>Select a file:</label>
+            <input
+              type='file'
+              id='thumbnail-file'
+              // custom
+              onChange={uploadFileHandler}
+            ></input>
+            {thumbnailUploading && <p>Uploading...</p>}
 
             <label htmlFor=''>Demo Video</label>
             <input
