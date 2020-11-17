@@ -4,13 +4,11 @@
 
 ✅ done
 
-### Phase 1 - Typescriptify
+### Phase 1 - Basic frontend (font, images, padding, centering text)
 
 📍 now
 
-### Phase 2 - Basic frontend (font, images, padding, centering text)
-
-### Phase 3 - Emails & forms
+### Phase 2 - Emails & forms
 
 ### Phase 3 - Payment views and functionnality
 
