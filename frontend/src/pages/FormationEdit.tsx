@@ -86,6 +86,7 @@ const FormationEdit = (props: any) => {
     const file = e.target.files[0]
     const formData = new FormData()
     formData.append('image', file)
+
     setUploading(true)
     try {
       const config = {
@@ -93,10 +94,13 @@ const FormationEdit = (props: any) => {
           'Content-Type': 'multipart/form-data',
         },
       }
+      console.log('starting')
       const { data } = await axios.post('/api/upload', formData, config)
+      console.log('ok done')
       setLogo(data)
       setUploading(false)
     } catch (err) {
+      console.log(err)
       setUploading(false)
     }
   }
