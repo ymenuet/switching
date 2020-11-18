@@ -7,6 +7,7 @@ import connectDB from './config/db.js'
 import formationRoutes from './routes/formationRoutes.js'
 import userRoutes from './routes/userRoutes.js'
 import uploadRoutes from './routes/uploadRoutes.js'
+import sendEmail from './email.js'
 // import { errorMonitor } from 'nodemailer/lib/mailer'
 
 dotenv.config()
@@ -49,3 +50,5 @@ app.listen(
     `server running in ${process.env.NODE_ENV} on port ${PORT}`.yellow.bold
   )
 )
+
+await sendEmail({ to: 'cyys100@gmail.com' })
