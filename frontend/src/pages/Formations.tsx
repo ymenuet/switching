@@ -2,15 +2,18 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { listFormations } from '../actions/formationActions.js'
 import { Link } from 'react-router-dom'
+import classes from './Formations.module.css'
 
 const Formations = () => {
   const dispatch = useDispatch()
 
   const formationList = useSelector((state: any) => state.formationList)
   const { loading, error, formations } = formationList
+
   useEffect(() => {
     dispatch(listFormations())
   }, [dispatch])
+  console.log(formations)
 
   // const formations: string[] = []
 
@@ -29,11 +32,17 @@ const Formations = () => {
         <p>
           {formations.map((formation: any) => {
             return (
-              <div>
+              <div className={classes.Formation}>
                 <h3>{formation.title}</h3>
-                <p>{formation.shortDescription}</p>
-                <p>{formation.difficulty}</p>
-                <p>{formation.price}</p>
+                <p>Description: {formation.shortDescription}</p>
+                <p>Difficulté: {formation.difficulty}</p>
+                <p>Prix: $ {formation.price}</p>
+                <img src={formation.logo} alt='formation logo' />
+                <img
+                  src={formation.backgroundImage}
+                  alt='formation background image'
+                />
+                <img src={formation.thumbnail} alt='formation thumbnail' />
                 <Link to='/purchase'>Je me lance</Link>
               </div>
             )

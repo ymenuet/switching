@@ -5,13 +5,15 @@
   justify-content: space-between;
   padding: 32px;
 }
+.NavBar a {
+  text-decoration: none;
+}
 
 .NavLogo {
   width: 180px;
 }
 
-.NavLinks a {
-  text-decoration: none;
-  margin: 0 16px;
+.NavLink {
+  margin: 0 20px;
   text-transform: uppercase;
 }

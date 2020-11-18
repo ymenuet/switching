@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../actions/userActions'
 import Logo from '../images/logo-text.png'
 import classes from './Header.module.css'
+import { Button, Dropdown, ButtonGroup } from 'react-bootstrap'
 
 const headerStyle = {
   width: '100vw',
@@ -28,21 +29,56 @@ const Header = () => {
         <img src={Logo} alt='Logo' className={classes.NavLogo} />
       </NavLink>
       <div className={classes.NavLinks}>
-        <NavLink to='/formations'>formations</NavLink>
-        <NavLink to='/purchase'>je me lance</NavLink>
-        <NavLink to='/register'>s'inscrire</NavLink>
+        <NavLink className={classes.NavLink} to='/formations'>
+          formations
+        </NavLink>
+        <NavLink className={classes.NavLink} to='/purchase'>
+          je me lance
+        </NavLink>
         {userInfo ? (
-          <>
-            <NavLink to='/profile'>Mon profil</NavLink>
-            <p onClick={logoutHandler}>déconnexion</p>
-          </>
+          <Dropdown as={ButtonGroup}>
+            <Button variant='success'>Mes cours</Button>
+            <Dropdown.Toggle
+              split
+              variant='success'
+              id='dropdown-split-basic'
+            />
+            <Dropdown.Menu>
+              <Dropdown.Item>
+                <NavLink to='/profile'>Mon Profil</NavLink>
+              </Dropdown.Item>
+              {userInfo.isAdmin && (
+                <>
+                  <Dropdown.Item>
+                    <NavLink to='/admin/user-list'>
+                      Gestion des utilisateurs
+                    </NavLink>
+                  </Dropdown.Item>
+                  <Dropdown.Item>
+                    <NavLink to='/admin/formation-list'>
+                      Gestion des Formations
+                    </NavLink>
+                  </Dropdown.Item>
+
+                  <Dropdown.Divider />
+                </>
+              )}
+
+              <Dropdown.Item href='#/action-3'>
+                {' '}
+                <span onClick={logoutHandler}>Déconnexion</span>
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
         ) : (
-          <NavLink to='/login'>connexion</NavLink>
-        )}
-        {userInfo?.isAdmin && (
           <>
-            <NavLink to='/admin/user-list'>Utilisateurs</NavLink>
-            <NavLink to='/admin/formation-list'>Formations</NavLink>
+            <Button variant='primary'>
+              <NavLink to='/register'>s'inscrire</NavLink>
+            </Button>{' '}
+            <Button variant='secondary'>
+              {' '}
+              <NavLink to='/login'>connexion</NavLink>
+            </Button>{' '}
           </>
         )}
       </div>

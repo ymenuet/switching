@@ -14,7 +14,6 @@ import FormationEdit from './pages/FormationEdit'
 import Purchase from './pages/Purchase'
 import NotFound from './pages/404'
 import Header from './components/Header'
-import Footer from './components/Footer'
 import Container from './components/Container'
 
 function App() {
@@ -36,10 +35,9 @@ function App() {
           <Route path='/formations' exact component={Formations} />
           <Route path='/formations/:id' component={Formation} />
           <Route path='/purchase' component={Purchase} />
-          <Redirect from='/' to='/404' />
+          {/* <Redirect from='/' to='/404' /> */}
         </Container>
       </Switch>
-      <Footer />
     </div>
   )
 }
