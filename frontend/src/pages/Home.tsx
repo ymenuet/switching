@@ -1,4 +1,5 @@
 import React from 'react'
+import ContactForm from '../components/ContactForm'
 
 const home = () => {
   return (
@@ -7,6 +8,7 @@ const home = () => {
       <ul>
         <li>Fullscreen gif</li>
         <p>Prendre rendez-vous avec un conseiller (Contact compoent)</p>
+        <ContactForm />
       </ul>
     </div>
   )
