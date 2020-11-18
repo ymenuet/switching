@@ -4,7 +4,7 @@
 
 ✅ done
 
-### Phase 1 - Basic frontend (font, images, padding, centering text)
+### Phase 1 - Basic design (font, images, padding, centering text)
 
 ✅ done
 
