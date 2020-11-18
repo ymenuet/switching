@@ -4,11 +4,13 @@
 
 ✅ done
 
-### Phase 1 - Basic frontend (font, images, padding, centering text)
+### Phase 1 - Basic design (font, images, padding, centering text)
 
-📍 now
+✅ done
 
 ### Phase 2 - Emails & forms
+
+📍 now
 
 ### Phase 3 - Payment views and functionnality
 
