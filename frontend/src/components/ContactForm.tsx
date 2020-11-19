@@ -22,7 +22,7 @@ const Contact = () => {
   }
   const sendContactEmail = () => {
     const emailData = {
-      to: `fraissearistide@gmail.com`,
+      to: email,
       subject: `Demande de ${firstName} ${lastName}: ${chosenFormation}`,
       html: `
       <ul>
@@ -120,12 +120,6 @@ const Contact = () => {
           </button>
         </form>
       </FormContainer>
-      <p>Sélection de la formation</p>
-      <p>Nom</p>
-      <p>Prénom</p>
-      <p>Numéro de téléphone</p>
-      <p>Date et horaire de prise de rendez-vous</p>
-      <p>Adresse mail</p>
     </div>
   )
 }
