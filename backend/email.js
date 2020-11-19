@@ -5,9 +5,9 @@ const sendEmail = async ({ to, subject, text, html }) => {
   const msg = {
     to: to,
     from: 'ni.fraisse@gmail.com', // Use the email address or domain you verified above
-    subject: 'hey bro',
-    text: 'text msg',
-    html: '<strong>html msg in strong tags</strong>',
+    subject: subject || 'no subject',
+    text: text || 'no text',
+    html: html || '<strong>no html</strong>',
   }
 
   try {

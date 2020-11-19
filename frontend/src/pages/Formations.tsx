@@ -13,9 +13,6 @@ const Formations = () => {
   useEffect(() => {
     dispatch(listFormations())
   }, [dispatch])
-  console.log(formations)
-
-  // const formations: string[] = []
 
   return (
     <>

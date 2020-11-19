@@ -102,7 +102,7 @@ const Profile = (props: any) => {
           <label htmlFor=''>Date Of Birth</label>
           <input
             type='date'
-            placeholder='Enter birthDate'
+            placeholder='Enter birth date'
             value={birthDate}
             onChange={(e) => setBirthDate(e.target.value)}
           />
