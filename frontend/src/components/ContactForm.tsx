@@ -22,7 +22,7 @@ const Contact = () => {
   }
   const sendContactEmail = () => {
     const emailData = {
-      to: email,
+      to: `contact@switchingformation.fr`, // email to receive inquiries
       subject: `Demande de ${firstName} ${lastName}: ${chosenFormation}`,
       html: `
       <ul>
@@ -42,27 +42,31 @@ const Contact = () => {
     dispatch(listFormations())
   }, [dispatch])
   return (
-    <div>
+    <div style={{ border: '1px solid #ccc' }}>
       <FormContainer>
         <h1>Nous Contacter</h1>
         <form method='POST' onSubmit={handleSubmit}>
           <div>
             <label>Sélectionnez la formation qui vous intéresse</label>
-            <select
-              name='formation'
-              id='formation'
-              value={chosenFormation}
-              onChange={(e: any) => setChosenFormation(e.target.value)}
-            >
-              {formations.map((formation: any) => {
-                return (
-                  <option key={formation.id} value={formation.title}>
-                    {formation.title}
-                  </option>
-                )
-              })}
-              <option value='Autre demande'>Autre demande</option>
-            </select>
+            {loading ? (
+              <p>Loading</p>
+            ) : (
+              <select
+                name='formation'
+                id='formation'
+                value={chosenFormation}
+                onChange={(e: any) => setChosenFormation(e.target.value)}
+              >
+                {formations.map((formation: any) => {
+                  return (
+                    <option key={formation.id} value={formation.title}>
+                      {formation.title}
+                    </option>
+                  )
+                })}
+                <option value='Autre demande'>Autre demande</option>
+              </select>
+            )}
           </div>
 
           <div>
