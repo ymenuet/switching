@@ -15,8 +15,12 @@ import Purchase from './pages/purchase/Purchase'
 import NotFound from './pages/404'
 import Header from './components/Header'
 import Container from './components/Container'
+import { Elements } from '@stripe/react-stripe-js'
+import { loadStripe } from '@stripe/stripe-js'
 
 function App() {
+  const stripePromise = loadStripe('pk_test_JJ1eMdKN0Hp4UFJ6kWXWO4ix00jtXzq5XG')
+
   return (
     <div>
       <Header />
@@ -34,7 +38,14 @@ function App() {
           <Route path='/about' component={About} />
           <Route path='/formations' exact component={Formations} />
           <Route path='/formations/:id' component={Formation} />
-          <Route path='/purchase' component={Purchase} />
+          <Route
+            path='/purchase'
+            render={() => (
+              <Elements stripe={stripePromise}>
+                <Purchase />
+              </Elements>
+            )}
+          />
           <Route path='*' component={NotFound} />
         </Container>
       </Switch>
