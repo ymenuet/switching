@@ -34,12 +34,12 @@ const Formations = () => {
                 <p>Description: {formation.shortDescription}</p>
                 <p>Difficulté: {formation.difficulty}</p>
                 <p>Prix: $ {formation.price}</p>
-                <img src={formation.logo} alt='formation logo' />
+                <img src={formation.logo} alt={formation.logo} />
                 <img
                   src={formation.backgroundImage}
-                  alt='formation background image'
+                  alt={formation.backgroundImage}
                 />
-                <img src={formation.thumbnail} alt='formation thumbnail' />
+                <img src={formation.thumbnail} alt={formation.thumbnail} />
                 <Link to='/purchase'>Je me lance</Link>
               </div>
             )

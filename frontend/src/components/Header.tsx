@@ -6,15 +6,6 @@ import Logo from '../images/logo-text.png'
 import classes from './Header.module.css'
 import { Button, Dropdown, ButtonGroup } from 'react-bootstrap'
 
-const headerStyle = {
-  width: '100vw',
-  height: '100px',
-  border: '1px solid',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-evenly',
-}
-
 const Header = () => {
   const dispatch = useDispatch()
   const userLogin = useSelector((state: any) => state.userLogin)

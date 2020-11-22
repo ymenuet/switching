@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { register } from '../actions/userActions'
 import FormContainer from './FormContainer'
-import classes from '*.module.css'
 
 const Register = (props: any) => {
   const [firstName, setFirstName] = useState('')

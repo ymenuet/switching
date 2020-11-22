@@ -59,14 +59,7 @@ const FormationEdit = (props: any) => {
         setDifficulty(formation.difficulty)
       }
     }
-  }, [
-    dispatch,
-    formationId,
-    props.history,
-    formation,
-    formationId,
-    successUpdate,
-  ])
+  }, [dispatch, formationId, props.history, formation, successUpdate])
 
   const submitHandler = (e: any) => {
     e.preventDefault()

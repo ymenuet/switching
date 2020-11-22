@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Redirect, Switch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import Home from './pages/Home'
 import About from './pages/About'
 import Formations from './pages/Formations'
@@ -22,7 +22,7 @@ function App() {
       <Header />
       <Switch>
         <Container>
-          <Route path='/' exact component={Home} />
+          <Route exact path='/' component={Home} />
           <Route path='/login' component={Login} />
           <Route path='/register' component={Register} />
           <Route path='/profile' component={Profile} />
@@ -35,7 +35,7 @@ function App() {
           <Route path='/formations' exact component={Formations} />
           <Route path='/formations/:id' component={Formation} />
           <Route path='/purchase' component={Purchase} />
-          {/* <Redirect from='/' to='/404' /> */}
+          <Route path='*' component={NotFound} />
         </Container>
       </Switch>
     </div>

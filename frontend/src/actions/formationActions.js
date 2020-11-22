@@ -15,7 +15,6 @@ import {
   FORMATION_UPDATE_REQUEST,
   FORMATION_UPDATE_SUCCESS,
   FORMATION_UPDATE_FAIL,
-  FORMATION_UPDATE_RESET,
 } from '../constants/formationConstants'
 
 export const listFormations = () => async (dispatch) => {
