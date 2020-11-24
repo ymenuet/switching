@@ -17,9 +17,10 @@ import Header from './components/Header'
 import Container from './components/Container'
 import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PK!)
 
-function App() {
-  const stripePromise = loadStripe('pk_test_JJ1eMdKN0Hp4UFJ6kWXWO4ix00jtXzq5XG')
+const App = () => {
+  console.log('api key frontend:', process.env.REACT_APP_STRIPE_PK)
 
   return (
     <div>

@@ -11,6 +11,19 @@ import { listFormations } from '../../actions/formationActions.js'
 import FormContainer from '../FormContainer'
 
 const Purchase = () => {
+  const dispatch = useDispatch()
+  const formationList = useSelector((state) => state.formationList)
+  const { loading, error, formations } = formationList
+  const [chosenFormation, setChosenFormation] = useState({
+    title: '',
+    price: '',
+  })
+  const [purchasePhase, setPurchasePhase] = useState(0)
+  const [email, setEmail] = useState('')
+  const [creditCardNumber, setCreditCardNumber] = useState('')
+  const [creditCardExpirationDate, setCreditCardExpirationDate] = useState('')
+  const [creditCardCCV, setCreditCardCCV] = useState('')
+
   const stripe = useStripe()
   const elements = useElements()
 
@@ -37,20 +50,32 @@ const Purchase = () => {
     } else {
       console.log('[PaymentMethod]', paymentMethod)
     }
-  }
 
-  const dispatch = useDispatch()
-  const formationList = useSelector((state) => state.formationList)
-  const { loading, error, formations } = formationList
-  const [chosenFormation, setChosenFormation] = useState({
-    title: '',
-    price: '',
-  })
-  const [purchasePhase, setPurchasePhase] = useState(0)
-  const [email, setEmail] = useState('')
-  const [creditCardNumber, setCreditCardNumber] = useState('')
-  const [creditCardExpirationDate, setCreditCardExpirationDate] = useState('')
-  const [creditCardCCV, setCreditCardCCV] = useState('')
+    // Create a payment intent on the server
+    // Get client_secret of that paymet intent
+    // Need reference to the cardelement
+    // Need reference to stripejs object
+    // Create a payment method
+    // Confirm the card payment
+    // Payment method id and client secret
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${process.env.REACT_APP_STRIPE_SK}`,
+      },
+    }
+
+    const { data: clientSecret } = await axios.post(
+      '/api/payments',
+      {
+        amount: chosenFormation.price,
+      },
+      config
+    )
+
+    console.log(clientSecret)
+  }
 
   const prev = () => setPurchasePhase((purchasePhase) => purchasePhase - 1)
   const next = () => setPurchasePhase((purchasePhase) => purchasePhase + 1)
