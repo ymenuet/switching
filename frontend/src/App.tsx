@@ -15,8 +15,13 @@ import Purchase from './pages/purchase/Purchase'
 import NotFound from './pages/404'
 import Header from './components/Header'
 import Container from './components/Container'
+import { Elements } from '@stripe/react-stripe-js'
+import { loadStripe } from '@stripe/stripe-js'
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PK!)
 
-function App() {
+const App = () => {
+  console.log('api key frontend:', process.env.REACT_APP_STRIPE_PK)
+
   return (
     <div>
       <Header />
@@ -34,7 +39,14 @@ function App() {
           <Route path='/about' component={About} />
           <Route path='/formations' exact component={Formations} />
           <Route path='/formations/:id' component={Formation} />
-          <Route path='/purchase' component={Purchase} />
+          <Route
+            path='/purchase'
+            render={() => (
+              <Elements stripe={stripePromise}>
+                <Purchase />
+              </Elements>
+            )}
+          />
           <Route path='*' component={NotFound} />
         </Container>
       </Switch>

@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import {
+  Elements,
+  CardElement,
+  useStripe,
+  useElements,
+} from '@stripe/react-stripe-js'
 import { useDispatch, useSelector } from 'react-redux'
 import { listFormations } from '../../actions/formationActions.js'
 import FormContainer from '../FormContainer'
 
 const Purchase = () => {
   const dispatch = useDispatch()
-  const formationList = useSelector((state: any) => state.formationList)
+  const formationList = useSelector((state) => state.formationList)
   const { loading, error, formations } = formationList
   const [chosenFormation, setChosenFormation] = useState({
     title: '',
@@ -17,6 +23,59 @@ const Purchase = () => {
   const [creditCardNumber, setCreditCardNumber] = useState('')
   const [creditCardExpirationDate, setCreditCardExpirationDate] = useState('')
   const [creditCardCCV, setCreditCardCCV] = useState('')
+
+  const stripe = useStripe()
+  const elements = useElements()
+
+  const handlePay = async (event) => {
+    event.preventDefault()
+    if (!stripe || !elements) {
+      // Stripe.js has not loaded yet. Make sure to disable
+      // form submission until Stripe.js has loaded.
+      return
+    }
+    // Get a reference to a mounted CardElement. Elements knows how
+    // to find your CardElement because there can only ever be one of
+    // each type of element.
+    const cardElement = elements.getElement(CardElement)
+
+    // Use your card Element with other Stripe.js APIs
+    const { error, paymentMethod } = await stripe.createPaymentMethod({
+      type: 'card',
+      card: cardElement,
+    })
+
+    if (error) {
+      console.log('[error]', error)
+    } else {
+      console.log('[PaymentMethod]', paymentMethod)
+    }
+
+    // Create a payment intent on the server
+    // Get client_secret of that paymet intent
+    // Need reference to the cardelement
+    // Need reference to stripejs object
+    // Create a payment method
+    // Confirm the card payment
+    // Payment method id and client secret
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${process.env.REACT_APP_STRIPE_SK}`,
+      },
+    }
+
+    const { data: clientSecret } = await axios.post(
+      '/api/payments',
+      {
+        amount: chosenFormation.price,
+      },
+      config
+    )
+
+    console.log(clientSecret)
+  }
 
   const prev = () => setPurchasePhase((purchasePhase) => purchasePhase - 1)
   const next = () => setPurchasePhase((purchasePhase) => purchasePhase + 1)
@@ -39,13 +98,13 @@ const Purchase = () => {
             name='formation'
             id='formation'
             value={chosenFormation.title}
-            onChange={(e: any) =>
+            onChange={(e) =>
               setChosenFormation(
-                formations.find((f: any) => (f.title = e.target.value))
+                formations.find((f) => (f.title = e.target.value))
               )
             }
           >
-            {formations.map((formation: any) => {
+            {formations.map((formation) => {
               return (
                 <option key={formation.id} value={formation.title}>
                   {`${formation.title} (${formation.price}€)`}
@@ -61,8 +120,15 @@ const Purchase = () => {
   const PaymentDetails = (
     <>
       <h2>Paiement</h2>
+      <form onSubmit={handlePay}>
+        <CardElement />
+        <button type='submit' disabled={!stripe}>
+          Pay
+        </button>
+      </form>
+
       <FormContainer>
-        <form action=''>
+        <form>
           <div>
             <label htmlFor=''>Entrez votre email</label>
             <input
@@ -147,7 +213,7 @@ const Purchase = () => {
   }
 
   return (
-    <div>
+    <>
       <h1>Je me lance</h1>
 
       <ul>
@@ -160,7 +226,7 @@ const Purchase = () => {
         {purchasePhase < 3 && <button onClick={next}>Next</button>}
         {currentScreen}
       </ul>
-    </div>
+    </>
   )
 }
 

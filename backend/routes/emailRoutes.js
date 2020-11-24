@@ -1,6 +1,6 @@
 import asyncHandler from 'express-async-handler'
 import express from 'express'
-import sendEmail from '../email.js'
+import sendEmail from '../utils/email.js'
 
 const router = express.Router()
 

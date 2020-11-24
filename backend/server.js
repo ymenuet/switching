@@ -8,7 +8,7 @@ import formationRoutes from './routes/formationRoutes.js'
 import userRoutes from './routes/userRoutes.js'
 import uploadRoutes from './routes/uploadRoutes.js'
 import emailRoutes from './routes/emailRoutes.js'
-import sendEmail from './email.js'
+import paymentRoutes from './routes/paymentRoutes.js'
 // import { errorMonitor } from 'nodemailer/lib/mailer'
 
 dotenv.config()
@@ -38,6 +38,7 @@ app.use('/api/formations', formationRoutes)
 app.use('/api/upload', uploadRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/email', emailRoutes)
+app.use('/api/payments', paymentRoutes)
 
 const __dirname = path.resolve()
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
