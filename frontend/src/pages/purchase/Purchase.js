@@ -29,6 +29,13 @@ const Purchase = () => {
 
   const handlePay = async (event) => {
     event.preventDefault()
+    // Create a payment intent on the server
+    // Get client_secret of that paymet intent
+    // Need reference to the cardelement
+    // Need reference to stripejs object
+    // Create a payment method
+    // Confirm the card payment
+    // Payment method id and client secret
     if (!stripe || !elements) {
       // Stripe.js has not loaded yet. Make sure to disable
       // form submission until Stripe.js has loaded.
@@ -51,29 +58,9 @@ const Purchase = () => {
       console.log('[PaymentMethod]', paymentMethod)
     }
 
-    // Create a payment intent on the server
-    // Get client_secret of that paymet intent
-    // Need reference to the cardelement
-    // Need reference to stripejs object
-    // Create a payment method
-    // Confirm the card payment
-    // Payment method id and client secret
-
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${process.env.REACT_APP_STRIPE_SK}`,
-      },
-    }
-
-    const { data: clientSecret } = await axios.post(
-      '/api/payments',
-      {
-        amount: chosenFormation.price,
-      },
-      config
-    )
-
+    const { data: clientSecret } = await axios.post('/api/payments', {
+      amount: chosenFormation.price,
+    })
     console.log(clientSecret)
   }
 
