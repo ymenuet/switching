@@ -72,6 +72,7 @@ const Purchase = () => {
       payment_method: paymentMethod.id,
     })
     next()
+    // test
   }
 
   useEffect(() => {
