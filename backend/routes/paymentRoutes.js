@@ -1,11 +1,14 @@
 import Stripe from 'stripe'
 import asyncHandler from 'express-async-handler'
 import express from 'express'
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 const router = express.Router()
 
 const stripe = Stripe(process.env.STRIPE_SK)
-
+console.log('api key is', process.env)
 router.route('/').post(
   asyncHandler(async (req, res) => {
     if (req.method == 'POST') {
