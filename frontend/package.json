@@ -1,6 +1,6 @@
 {
   "name": "my-app",
-  "proxy": "http://127.0.0.1:5050",
+  "proxy": "https://127.0.0.1:3343",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

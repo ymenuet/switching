@@ -14,6 +14,9 @@
 # production
 /build
 
+# SSL
+/backend/cert/*
+
 # misc
 .DS_Store
 .env
