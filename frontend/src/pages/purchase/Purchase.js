@@ -27,6 +27,9 @@ const Purchase = () => {
   const stripe = useStripe()
   const elements = useElements()
 
+  const prev = () => setPurchasePhase((purchasePhase) => purchasePhase - 1)
+  const next = () => setPurchasePhase((purchasePhase) => purchasePhase + 1)
+
   const handlePay = async (event) => {
     event.preventDefault()
     // Create a payment intent on the server
@@ -44,12 +47,19 @@ const Purchase = () => {
     // Get a reference to a mounted CardElement. Elements knows how
     // to find your CardElement because there can only ever be one of
     // each type of element.
+    const { data: clientSecret } = await axios.post('/api/payments', {
+      amount: parseInt(chosenFormation.price) * 100,
+    })
     const cardElement = elements.getElement(CardElement)
 
     // Use your card Element with other Stripe.js APIs
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: 'card',
       card: cardElement,
+      billing_details: {
+        name: 'bob',
+        email: 'bob@hotmail.com',
+      },
     })
 
     if (error) {
@@ -58,14 +68,11 @@ const Purchase = () => {
       console.log('[PaymentMethod]', paymentMethod)
     }
 
-    const { data: clientSecret } = await axios.post('/api/payments', {
-      amount: chosenFormation.price,
+    const confirmedCardPayment = await stripe.confirmCardPayment(clientSecret, {
+      payment_method: paymentMethod.id,
     })
-    console.log(clientSecret)
+    next()
   }
-
-  const prev = () => setPurchasePhase((purchasePhase) => purchasePhase - 1)
-  const next = () => setPurchasePhase((purchasePhase) => purchasePhase + 1)
 
   useEffect(() => {
     dispatch(listFormations())
