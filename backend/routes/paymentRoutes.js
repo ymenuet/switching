@@ -2,6 +2,7 @@ import Stripe from 'stripe'
 import asyncHandler from 'express-async-handler'
 import express from 'express'
 import dotenv from 'dotenv'
+import User from '../models/User.js'
 
 dotenv.config()
 
@@ -23,6 +24,16 @@ router.route('/').post(
         // Assuming payment is received by now
         // If user has an account, just add the formation to the user in DB
         // If not, create a user with that email
+
+        // CASE 1: USER ALREADY EXISTS WITH THAT EMAIL
+        console.log('The body req is', req.body)
+        // Find the user
+        const user = await User.findOne({ email: req.body.email })
+
+        if (user) {
+          await user.formations.push(req.body.formationId)
+          await user.save()
+        }
 
         // In any case, send an email to user with "Accéder à ma formation" link
         // This link redirects to login page. If user exists, classic login.

@@ -52,8 +52,8 @@ app.use('/api/upload', uploadRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/email', emailRoutes)
 app.use('/api/payments', paymentRoutes)
-
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
+
 app.use(notFound)
 app.use(errorHandler)
 
@@ -66,4 +66,4 @@ app.use(errorHandler)
 //   )
 // )
 
-sslServer.listen(3343, () => console.log('Hello from SSL server'))
+sslServer.listen(5050, () => console.log('Hello from SSL server'))

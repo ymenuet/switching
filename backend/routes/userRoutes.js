@@ -23,5 +23,6 @@ router
   .delete(protect, mustBeAdmin, deleteUser)
   .get(protect, mustBeAdmin, getUserById)
   .put(protect, mustBeAdmin, updateUser)
+// router.route('/:id/formations').post(addFormationToUser)
 
 export default router

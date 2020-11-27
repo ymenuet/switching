@@ -15,6 +15,7 @@ const users = [
       country: 'France',
     },
     phoneNumber: '0647399283',
+    formations: [],
   },
   {
     email: 'john@example.com',
@@ -29,6 +30,7 @@ const users = [
       country: 'Dijon',
     },
     phoneNumber: '0347799283',
+    formations: [],
   },
   {
     email: 'jane@example.com',
@@ -43,6 +45,7 @@ const users = [
       country: 'Le Mans',
     },
     phoneNumber: '0647119098',
+    formations: [],
   },
 ]
 
