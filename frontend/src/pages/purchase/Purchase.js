@@ -199,6 +199,7 @@ const Purchase = () => {
       </ul>
     </>
   )
+
   const Thanks = (
     <>
       <h2>Merci!</h2>
