@@ -67,11 +67,23 @@ const Purchase = () => {
     } else {
       console.log('[PaymentMethod]', paymentMethod)
     }
+    try {
+      const confirmedCardPayment = await stripe.confirmCardPayment(
+        clientSecret,
+        {
+          payment_method: paymentMethod.id,
+        }
+      )
+      console.log('worked')
 
-    const confirmedCardPayment = await stripe.confirmCardPayment(clientSecret, {
-      payment_method: paymentMethod.id,
-    })
-    next()
+      next()
+    } catch (err) {
+      console.log('problem')
+    } finally {
+      console.log('worked or problem')
+    }
+    console.log('after the try/catch/finally')
+
     // test
   }
 
@@ -112,6 +124,7 @@ const Purchase = () => {
       </div>
     </>
   )
+
   const PaymentDetails = (
     <>
       <h2>Paiement</h2>
@@ -192,7 +205,7 @@ const Purchase = () => {
     </>
   )
 
-  let currentScreen: any = null
+  let currentScreen = null
   switch (purchasePhase) {
     case 0:
       currentScreen = ChooseFormation

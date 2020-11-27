@@ -3,6 +3,12 @@ import bcrypt from 'bcryptjs'
 
 const userSchema = mongoose.Schema(
   {
+    formations: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Formation',
+      },
+    ],
     email: {
       type: String,
       required: true,
