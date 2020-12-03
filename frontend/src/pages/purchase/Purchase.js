@@ -9,6 +9,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 import { listFormations } from '../../actions/formationActions.js'
 import FormContainer from '../FormContainer'
+import { createNoSubstitutionTemplateLiteral } from 'typescript'
 
 const Purchase = () => {
   const dispatch = useDispatch()
@@ -47,9 +48,13 @@ const Purchase = () => {
     // Get a reference to a mounted CardElement. Elements knows how
     // to find your CardElement because there can only ever be one of
     // each type of element.
+
     const { data: clientSecret } = await axios.post('/api/payments', {
       amount: parseInt(chosenFormation.price) * 100,
+      email: email,
+      formationId: chosenFormation._id,
     })
+
     const cardElement = elements.getElement(CardElement)
 
     // Use your card Element with other Stripe.js APIs
@@ -74,15 +79,8 @@ const Purchase = () => {
           payment_method: paymentMethod.id,
         }
       )
-      console.log('worked')
-
       next()
-    } catch (err) {
-      console.log('problem')
-    } finally {
-      console.log('worked or problem')
-    }
-    console.log('after the try/catch/finally')
+    } catch (err) {}
 
     // test
   }
