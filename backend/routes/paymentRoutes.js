@@ -32,7 +32,7 @@ router.route('/').post(
 
         if (user) {
           await user.formations.push(req.body.formationId)
-          await user.save()
+          await user.save() //test
         }
 
         // In any case, send an email to user with "Accéder à ma formation" link
