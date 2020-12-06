@@ -9,7 +9,10 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 import { listFormations } from '../../actions/formationActions.js'
 import FormContainer from '../FormContainer'
+import { register } from '../../actions/userActions'
+
 import { createNoSubstitutionTemplateLiteral } from 'typescript'
+import { useDebouncedCallback } from 'use-debounce'
 
 const Purchase = () => {
   const dispatch = useDispatch()
@@ -19,11 +22,35 @@ const Purchase = () => {
     title: '',
     price: '',
   })
+  const [message, setMessage] = useState('')
   const [purchasePhase, setPurchasePhase] = useState(0)
   const [email, setEmail] = useState('')
+  const [userExists, setUserExists] = useState(true)
   const [creditCardNumber, setCreditCardNumber] = useState('')
   const [creditCardExpirationDate, setCreditCardExpirationDate] = useState('')
   const [creditCardCCV, setCreditCardCCV] = useState('')
+  const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+
+  const userLogin = useSelector((state) => state.userLogin)
+  const userRegister = useSelector((state) => state.userRegister)
+  const {
+    loading: userRegisterLoading,
+    error: userRegisterError,
+    userInfo: userSuccessInfo,
+  } = userRegister
+
+  const { userInfo } = userLogin
+
+  const debounced = useDebouncedCallback((value) => {
+    axios.get(`/api/users/emails/${value}`).then((res) => {
+      if (res.data === 'User not found') {
+        setUserExists(false)
+      } else if (res.data === 'User found') {
+        setUserExists(true)
+      }
+    })
+  }, 2000)
 
   const stripe = useStripe()
   const elements = useElements()
@@ -31,28 +58,47 @@ const Purchase = () => {
   const prev = () => setPurchasePhase((purchasePhase) => purchasePhase - 1)
   const next = () => setPurchasePhase((purchasePhase) => purchasePhase + 1)
 
-  const handlePay = async (event) => {
+  const handleEmailTyping = (value) => {
+    setEmail(value)
+  }
+
+  useEffect(() => {
+    if (purchasePhase === 1) {
+      debounced.callback(email)
+    }
+    if (userInfo) {
+      setEmail(userInfo.email)
+    }
+  }, [email])
+
+  const handleSubmit = (event) => {
     event.preventDefault()
-    // Create a payment intent on the server
-    // Get client_secret of that paymet intent
-    // Need reference to the cardelement
-    // Need reference to stripejs object
-    // Create a payment method
-    // Confirm the card payment
-    // Payment method id and client secret
+    if (userExists) {
+      handlePay()
+    } else {
+      if (password !== confirmPassword) {
+        setMessage('Passwords do not match')
+      } else {
+        console.log(email)
+        console.log(password)
+        dispatch(register('', '', '', '', '', '', email, password)).then(() =>
+          handlePay()
+        )
+      }
+    }
+  }
+
+  const handlePay = async (event) => {
     if (!stripe || !elements) {
-      // Stripe.js has not loaded yet. Make sure to disable
-      // form submission until Stripe.js has loaded.
       return
     }
-    // Get a reference to a mounted CardElement. Elements knows how
-    // to find your CardElement because there can only ever be one of
-    // each type of element.
 
     const { data: clientSecret } = await axios.post('/api/payments', {
       amount: parseInt(chosenFormation.price) * 100,
       email: email,
       formationId: chosenFormation._id,
+      password: password,
+      confirmPassword: confirmPassword,
     })
 
     const cardElement = elements.getElement(CardElement)
@@ -63,7 +109,7 @@ const Purchase = () => {
       card: cardElement,
       billing_details: {
         name: 'bob',
-        email: 'bob@hotmail.com',
+        email: email,
       },
     })
 
@@ -80,9 +126,9 @@ const Purchase = () => {
         }
       )
       next()
-    } catch (err) {}
-
-    // test
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   useEffect(() => {
@@ -90,6 +136,46 @@ const Purchase = () => {
   }, [dispatch])
 
   console.log(chosenFormation)
+
+  const userForm = userInfo ? (
+    <p>You are logged in as {userInfo.email}</p>
+  ) : (
+    <FormContainer>
+      <form>
+        <div>
+          <label htmlFor=''>Entrez votre email</label>
+          <input
+            type='text'
+            placeholder='votre email'
+            value={email}
+            onChange={(e) => handleEmailTyping(e.target.value)}
+          />
+        </div>
+        {userExists ? null : (
+          <>
+            <div>
+              <label htmlFor=''>Créez votre de passe</label>
+              <input
+                type='password'
+                placeholder='votre mot de passe'
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor=''>Confirmez votre mot de passe</label>
+              <input
+                type='password'
+                placeholder='confirmez votre mot de passe'
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+            </div>
+          </>
+        )}
+      </form>
+    </FormContainer>
+  )
 
   const ChooseFormation = (
     <>
@@ -126,53 +212,15 @@ const Purchase = () => {
   const PaymentDetails = (
     <>
       <h2>Paiement</h2>
-      <form onSubmit={handlePay}>
+      {JSON.stringify(userSuccessInfo)}
+      {userForm}
+
+      <form onSubmit={handleSubmit}>
         <CardElement />
         <button type='submit' disabled={!stripe}>
           Pay
         </button>
       </form>
-
-      <FormContainer>
-        <form>
-          <div>
-            <label htmlFor=''>Entrez votre email</label>
-            <input
-              type='text'
-              placeholder='votre email'
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div>
-            <label htmlFor=''>Numéro de carte de crédit</label>
-            <input
-              type='text'
-              placeholder='votre numéro de carte de crédit'
-              value={creditCardNumber}
-              onChange={(e) => setCreditCardNumber(e.target.value)}
-            />
-          </div>
-          <div>
-            <label htmlFor=''>Date d'expiration</label>
-            <input
-              type='date'
-              placeholder="date d'expiration"
-              value={creditCardExpirationDate}
-              onChange={(e) => setCreditCardExpirationDate(e.target.value)}
-            />
-          </div>
-          <div>
-            <label htmlFor=''>CCV</label>
-            <input
-              type='text'
-              placeholder='CCV'
-              value={creditCardCCV}
-              onChange={(e) => setCreditCardCCV(e.target.value)}
-            />
-          </div>
-        </form>
-      </FormContainer>
     </>
   )
   const PaymentConfirmation = (
@@ -222,7 +270,8 @@ const Purchase = () => {
   return (
     <>
       <h1>Je me lance</h1>
-
+      {message}
+      {userRegisterError}
       <ul>
         <li>All payment pages</li>
         <li>Stripe integration</li>

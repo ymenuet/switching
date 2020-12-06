@@ -209,6 +209,18 @@ const updateUser = asyncHandler(async (req, res) => {
   }
 })
 
+// @desc      Get all users
+// @route     GET api/users
+// @access    Public
+const checkIfUserExists = asyncHandler(async (req, res) => {
+  const user = await User.findOne({ email: req.params.email })
+  if (user) {
+    res.json('User found')
+  } else {
+    res.json('User not found')
+  }
+})
+
 export {
   authUser,
   registerUser,
@@ -218,4 +230,5 @@ export {
   deleteUser,
   getUserById,
   updateUser,
+  checkIfUserExists,
 }

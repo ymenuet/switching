@@ -25,28 +25,28 @@ const userSchema = mongoose.Schema(
     },
     firstName: {
       type: String,
-      required: true,
+      // required: true,
     },
     lastName: {
       type: String,
-      required: true,
+      // required: true,
     },
     birthDate: {
       type: Date,
-      required: true,
+      // required: true,
     },
     avatar: {
       type: String,
     },
     residentialAddress: {
-      address: { type: String, required: true },
-      city: { type: String, required: true },
-      postalCode: { type: String, required: true },
-      country: { type: String, required: true },
+      address: { type: String },
+      city: { type: String },
+      postalCode: { type: String },
+      country: { type: String },
     },
     phoneNumber: {
       type: String,
-      required: true,
+      // required: true,
     },
   },
   // Timestamps give us created_at and updated_at fields automatically
