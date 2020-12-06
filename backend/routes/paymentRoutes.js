@@ -26,13 +26,15 @@ router.route('/').post(
         // If not, create a user with that email
 
         // CASE 1: USER ALREADY EXISTS WITH THAT EMAIL
-        console.log('The body req is', req.body)
         // Find the user
         const user = await User.findOne({ email: req.body.email })
+        console.log(req.body)
 
         if (user) {
           await user.formations.push(req.body.formationId)
-          await user.save() //test
+          await user.save()
+        } else {
+          res.status(400).json('request failed in payment routes.')
         }
 
         // In any case, send an email to user with "Accéder à ma formation" link
