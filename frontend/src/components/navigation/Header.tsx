@@ -34,7 +34,9 @@ const Header = () => {
         </NavLink>
         {userInfo ? (
           <Dropdown as={ButtonGroup}>
-            <Button variant='success'>Mes cours</Button>
+            <Button variant='success'>
+              <NavLink to='/mes-cours'>Mes cours</NavLink>
+            </Button>
             <Dropdown.Toggle
               split
               variant='success'

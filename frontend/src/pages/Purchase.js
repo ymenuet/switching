@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import {
-  Elements,
-  CardElement,
-  useStripe,
-  useElements,
-} from '@stripe/react-stripe-js'
+import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js'
 import { useDispatch, useSelector } from 'react-redux'
 import { listFormations } from '../actions/formationActions.js'
 import FormContainer from '../components/FormContainer'
@@ -25,9 +20,6 @@ const Purchase = () => {
   const [purchasePhase, setPurchasePhase] = useState(0)
   const [email, setEmail] = useState('')
   const [userExists, setUserExists] = useState(true)
-  const [creditCardNumber, setCreditCardNumber] = useState('')
-  const [creditCardExpirationDate, setCreditCardExpirationDate] = useState('')
-  const [creditCardCCV, setCreditCardCCV] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [paymentError, setPaymentError] = useState('')
@@ -113,7 +105,7 @@ const Purchase = () => {
     })
     if (error) {
       console.log('the error is ', error)
-      setPaymentError(error)
+      setPaymentError(error.message)
     }
     try {
       await stripe.confirmCardPayment(clientSecret, {
@@ -225,15 +217,7 @@ const Purchase = () => {
       </p>
       <ul>
         <li>Email: {email}</li>
-        <li>
-          Numéro de carte:{' '}
-          {`${creditCardNumber.slice(0, 3)}**********${creditCardNumber.slice(
-            -4,
-            -1
-          )}`}
-        </li>
-        <li>Date d'expiration: {creditCardExpirationDate}</li>
-        <li>CCV: {creditCardCCV}</li>
+        <li>Numéro de carte: **********7012</li>
       </ul>
     </>
   )
