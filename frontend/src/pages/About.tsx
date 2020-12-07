@@ -3,10 +3,7 @@ import React from 'react'
 const about = () => {
   return (
     <>
-      <h1>A propos</h1>
-      <ul>
-        <li>cf maquette</li>
-      </ul>
+      <h1 className='text-center my-4'>A propos</h1>
     </>
   )
 }

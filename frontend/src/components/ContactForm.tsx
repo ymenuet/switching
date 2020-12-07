@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import FormContainer from './FormContainer'
+import Notification from './UI/Notification'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { listFormations } from '../actions/formationActions.js'
@@ -16,7 +17,10 @@ const Contact = () => {
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
   const [appointmentDate, setAppointmentDate] = useState('')
-  const [emailStatus, setEmailStatus] = useState('not sent')
+  const [emailStatus, setEmailStatus] = useState({
+    type: 'not sent',
+    payload: '',
+  })
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault()
@@ -37,8 +41,8 @@ const Contact = () => {
     }
     axios
       .post('/api/email', emailData)
-      .then((res) => setEmailStatus('success'))
-      .catch((err) => setEmailStatus(err.message))
+      .then((res) => setEmailStatus({ type: 'success', payload: '' }))
+      .catch((err) => setEmailStatus({ type: 'fail', payload: err.message }))
   }
 
   useEffect(() => {
@@ -125,7 +129,20 @@ const Contact = () => {
           <button type='submit' onClick={sendContactEmail}>
             Prendre un rendez-vous
           </button>
-          {emailStatus != 'not sent' && emailStatus}
+          {emailStatus.type == 'success' && (
+            <Notification
+              type='success'
+              message1="Merci d'avoir pris contact!"
+              message2='Nous vous répondrons dans les meilleurs délais.'
+            />
+          )}
+          {emailStatus.type == 'fail' && (
+            <Notification
+              type='warning'
+              message1='Désolé, une erreur est survenue. Contactez info@switching directement pour nous joindre.'
+              message2={`Message d'erreur: ${emailStatus.payload}`}
+            />
+          )}
         </form>
       </FormContainer>
     </div>

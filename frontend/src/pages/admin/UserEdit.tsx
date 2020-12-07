@@ -66,7 +66,7 @@ const UserEdit = (props: any) => {
         setIsAdmin(user.isAdmin)
         setBirthDate(user.birthDate)
         setAvatar(user.avatar || '')
-        setResidentialAddress(user.residentialAddress)
+        setResidentialAddress(user.residentialAddress || {})
         setPhoneNumber(user.phoneNumber)
       }
     }
