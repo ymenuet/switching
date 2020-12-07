@@ -10,10 +10,14 @@
 
 ### Phase 2 - Emails & forms
 
-📍 now
+✅ done
 
-### Phase 3 - Payment views and functionnality
+### Phase 3 - Payment functionnality
+
+✅ done
 
 ### Phase 4 - Secure platform access
+
+📍 now
 
 ### Phase 5 - Frontend design
