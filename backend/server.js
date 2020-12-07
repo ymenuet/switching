@@ -16,7 +16,7 @@ import { ok } from 'assert'
 // import { errorMonitor } from 'nodemailer/lib/mailer'
 const __dirname = path.resolve()
 
-dotenv.config()
+dotenv.config({ path: '../.env' })
 
 connectDB()
 
@@ -30,8 +30,8 @@ app.get('/', (req, res) => {
 
 const sslServer = https.createServer(
   {
-    key: fs.readFileSync(path.join(__dirname, 'backend', 'cert', 'key.pem')),
-    cert: fs.readFileSync(path.join(__dirname, 'backend', 'cert', 'cert.pem')),
+    key: fs.readFileSync(path.join(__dirname, 'cert', 'key.pem')),
+    cert: fs.readFileSync(path.join(__dirname, 'cert', 'cert.pem')),
   },
   app
 )
