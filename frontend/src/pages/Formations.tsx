@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { listFormations } from '../actions/formationActions.js'
 import { Link } from 'react-router-dom'
-import classes from './Formations.module.css'
+import classes from '../styles/Formations.module.css'
 
 const Formations = () => {
   const dispatch = useDispatch()

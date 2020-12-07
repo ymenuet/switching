@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import FormContainer from '../pages/FormContainer'
+import FormContainer from './FormContainer'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { listFormations } from '../actions/formationActions.js'
@@ -16,6 +16,7 @@ const Contact = () => {
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
   const [appointmentDate, setAppointmentDate] = useState('')
+  const [emailStatus, setEmailStatus] = useState('not sent')
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault()
@@ -34,18 +35,20 @@ const Contact = () => {
       </ul>
       `,
     }
-    axios.post('/api/email', emailData)
+    axios
+      .post('/api/email', emailData)
+      .then((res) => setEmailStatus('success'))
+      .catch((err) => setEmailStatus(err.message))
   }
-  console.log(chosenFormation)
 
   useEffect(() => {
     dispatch(listFormations())
   }, [dispatch])
   return (
-    <div style={{ border: '1px solid #ccc' }}>
+    <div className='py-5'>
       <FormContainer>
         <h1>Nous Contacter</h1>
-        <form method='POST' onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <div>
             <label>Sélectionnez la formation qui vous intéresse</label>
             {loading ? (
@@ -122,6 +125,7 @@ const Contact = () => {
           <button type='submit' onClick={sendContactEmail}>
             Prendre un rendez-vous
           </button>
+          {emailStatus != 'not sent' && emailStatus}
         </form>
       </FormContainer>
     </div>

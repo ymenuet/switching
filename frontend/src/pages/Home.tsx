@@ -1,17 +1,20 @@
 import React from 'react'
 import ContactForm from '../components/ContactForm'
+import classes from '../styles/Home.module.css'
+import Button from '../components/UI/Button'
 
-const home = () => {
+const Home = () => {
   return (
     <div>
-      <h1>Home</h1>
-      <ul>
-        <li>Fullscreen gif</li>
-        <p>Prendre rendez-vous avec un conseiller (Contact compoent)</p>
+      <div className={classes.Section}>
+        <h1 className='mb-4'>Ma passion, j'apprends, je deviens.</h1>
+        <Button type='PointNoir'>Découvrir nos programmes</Button>
+      </div>
+      <div className={[classes.Section, classes.LightBlue].join(' ')}>
         <ContactForm />
-      </ul>
+      </div>
     </div>
   )
 }
 
-export default home
+export default Home

@@ -1,9 +1,9 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { logout } from '../actions/userActions'
-import Logo from '../images/logo-text.png'
-import classes from './Header.module.css'
+import { logout } from '../../actions/userActions'
+import Logo from '../../images/logo-text.png'
+import classes from '../../styles/Header.module.css'
 import { Button, Dropdown, ButtonGroup } from 'react-bootstrap'
 
 const Header = () => {
@@ -20,11 +20,17 @@ const Header = () => {
         <img src={Logo} alt='Logo' className={classes.NavLogo} />
       </NavLink>
       <div className={classes.NavLinks}>
+        <NavLink className={classes.NavLink} to='/'>
+          Accueil
+        </NavLink>
         <NavLink className={classes.NavLink} to='/formations'>
-          formations
+          Formations
+        </NavLink>
+        <NavLink className={classes.NavLink} to='/about'>
+          À propos
         </NavLink>
         <NavLink className={classes.NavLink} to='/purchase'>
-          je me lance
+          Je m'inscris
         </NavLink>
         {userInfo ? (
           <Dropdown as={ButtonGroup}>

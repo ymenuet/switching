@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { getUserDetails, updateUserProfile } from '../actions/userActions'
+import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import FormContainer from './FormContainer'
+import { register } from '../../actions/userActions'
+import FormContainer from '../../components/FormContainer'
 
-const Profile = (props: any) => {
+const Register = (props: any) => {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [birthDate, setBirthDate] = useState('')
@@ -22,33 +23,13 @@ const Profile = (props: any) => {
 
   const dispatch = useDispatch()
 
-  const userDetails = useSelector((state: any) => state.userDetails)
-  const { loading, error, user } = userDetails
+  const userRegister = useSelector((state: any) => state.userRegister)
 
-  const userLogin = useSelector((state: any) => state.userLogin)
-  const { userInfo } = userLogin
+  const { loading, error, userInfo } = userRegister
 
-  const userUpdateProfile = useSelector((state: any) => state.userUpdateProfile)
-  const { success } = userUpdateProfile
-
-  useEffect(() => {
-    // If user isnn't logged in
-    if (!userInfo) {
-      props.history.push('/login')
-    } else {
-      if (!user?.firstName) {
-        dispatch(getUserDetails('profile'))
-      } else {
-        setFirstName(user.firstName)
-        setLastName(user.lastName)
-        setEmail(user.email)
-        setBirthDate(user.birthDate)
-        setAvatar(user.avatar || '')
-        setResidentialAddress(user.residentialAddress)
-        setPhoneNumber(user.phoneNumber)
-      }
-    }
-  }, [dispatch, props.history, userInfo, user])
+  const redirect = props.location.search
+    ? props.location.search.split('=')[1]
+    : '/'
 
   const submitHandler = (e: any) => {
     e.preventDefault()
@@ -56,27 +37,32 @@ const Profile = (props: any) => {
       setMessage('Passwords do not match')
     } else {
       dispatch(
-        updateUserProfile({
-          id: user._id,
+        register(
           firstName,
           lastName,
-          email,
-          password,
           birthDate,
           avatar,
           residentialAddress,
           phoneNumber,
-        })
+          email,
+          password
+        )
       )
     }
   }
 
+  useEffect(() => {
+    if (userInfo) {
+      props.history.push(redirect)
+    }
+  }, [props.history, userInfo, redirect])
+
   return (
     <FormContainer>
-      <h1>My Profile </h1>
+      <h1>Sign Up</h1>
+      {message && <p>{message}</p>}
       {error && <p>{JSON.stringify(error)}</p>}
       {loading && <p>Loading</p>}
-      {success ? 'success' : JSON.stringify(success)}
       <form onSubmit={submitHandler}>
         <div>
           <label htmlFor=''>First Name</label>
@@ -87,7 +73,6 @@ const Profile = (props: any) => {
             onChange={(e) => setFirstName(e.target.value)}
           />
         </div>
-
         <div>
           <label htmlFor=''>Last Name</label>
           <input
@@ -102,11 +87,12 @@ const Profile = (props: any) => {
           <label htmlFor=''>Date Of Birth</label>
           <input
             type='date'
-            placeholder='Enter birth date'
+            placeholder='Enter birthDate'
             value={birthDate}
             onChange={(e) => setBirthDate(e.target.value)}
           />
         </div>
+
         <div>
           <label htmlFor=''>Avatar</label>
           <input
@@ -131,10 +117,8 @@ const Profile = (props: any) => {
                 country: residentialAddress.country,
               })
             }
-          />{' '}
-        </div>
+          />
 
-        <div>
           <input
             type='address'
             placeholder='Enter postal code'
@@ -148,9 +132,7 @@ const Profile = (props: any) => {
               })
             }
           />
-        </div>
 
-        <div>
           <input
             type='address'
             placeholder='Enter city'
@@ -164,9 +146,7 @@ const Profile = (props: any) => {
               })
             }
           />
-        </div>
 
-        <div>
           <input
             type='address'
             placeholder='Enter country'
@@ -222,10 +202,16 @@ const Profile = (props: any) => {
           />
         </div>
 
-        <button type='submit'>Update</button>
+        <button type='submit'>Register</button>
+        <p>
+          Have an account?{' '}
+          <Link to={redirect ? `/login/redirect=${redirect}` : '/login'}>
+            Login
+          </Link>
+        </p>
       </form>
     </FormContainer>
   )
 }
 
-export default Profile
+export default Register

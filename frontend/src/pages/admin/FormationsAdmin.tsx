@@ -4,8 +4,8 @@ import {
   listFormations,
   deleteFormation,
   createFormation,
-} from '../actions/formationActions'
-import { FORMATION_CREATE_RESET } from '../constants/formationConstants'
+} from '../../actions/formationActions'
+import { FORMATION_CREATE_RESET } from '../../constants/formationConstants'
 import { Link } from 'react-router-dom'
 
 const FormationList = (props: any) => {

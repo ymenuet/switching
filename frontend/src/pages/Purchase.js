@@ -7,9 +7,9 @@ import {
   useElements,
 } from '@stripe/react-stripe-js'
 import { useDispatch, useSelector } from 'react-redux'
-import { listFormations } from '../../actions/formationActions.js'
-import FormContainer from '../FormContainer'
-import { register } from '../../actions/userActions'
+import { listFormations } from '../actions/formationActions.js'
+import FormContainer from '../components/FormContainer'
+import { register } from '../actions/userActions'
 
 import { createNoSubstitutionTemplateLiteral } from 'typescript'
 import { useDebouncedCallback } from 'use-debounce'

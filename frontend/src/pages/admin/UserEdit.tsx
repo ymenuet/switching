@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { getUserDetails, updateUser } from '../actions/userActions'
-import FormContainer from './FormContainer'
-import { USER_UPDATE_RESET } from '../constants/userConstants'
+import { getUserDetails, updateUser } from '../../actions/userActions'
+import FormContainer from '../../components/FormContainer'
+import { USER_UPDATE_RESET } from '../../constants/userConstants'
 
 const UserEdit = (props: any) => {
   const userId = props.match.params.id

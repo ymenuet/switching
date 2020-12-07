@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { login } from '../actions/userActions'
-import FormContainer from './FormContainer'
+import { login } from '../../actions/userActions'
+import FormContainer from '../../components/FormContainer'
 
 const Login = (props: any) => {
   const [email, setEmail] = useState('')

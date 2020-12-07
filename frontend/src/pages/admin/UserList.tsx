@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { listUsers, deleteUser } from '../actions/userActions'
+import { listUsers, deleteUser } from '../../actions/userActions'
 import { Link } from 'react-router-dom'
 
 const UserList = (props: any) => {
