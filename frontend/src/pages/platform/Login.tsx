@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { login } from '../actions/userActions'
-import FormContainer from './FormContainer'
+import { login } from '../../actions/userActions'
+import FormContainer from '../../components/FormContainer'
+import Notification from '../../components/UI/Notification'
 
 const Login = (props: any) => {
   const [email, setEmail] = useState('')
@@ -27,7 +28,7 @@ const Login = (props: any) => {
   return (
     <FormContainer>
       <h1>Sign In</h1>
-      {error && <p>{JSON.stringify(error)}</p>}
+      {error && <Notification type='warning' message1={error} />}
       {loading && <p>Loading</p>}
       <form onSubmit={submitHandler}>
         <div>

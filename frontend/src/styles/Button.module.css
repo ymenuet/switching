@@ -1,0 +1,19 @@
+.BtnSwitching {
+  background: none;
+  border: none;
+}
+
+.PointNoir {
+  display: flex;
+  align-items: center;
+  font-size: 22px;
+}
+
+.PointNoir div {
+  border: 3px solid;
+  height: 24px;
+  width: 24px;
+  background-color: #2b3142;
+  border-radius: 50%;
+  margin-right: 10px;
+}

@@ -4,16 +4,16 @@ import Home from './pages/Home'
 import About from './pages/About'
 import Formations from './pages/Formations'
 import Formation from './pages/Formation'
-import Login from './pages/Login'
-import Register from './pages/Register'
-import Profile from './pages/Profile'
-import UserList from './pages/UserList'
-import UserEdit from './pages/UserEdit'
-import FormationsAdmin from './pages/FormationsAdmin'
-import FormationEdit from './pages/FormationEdit'
-import Purchase from './pages/purchase/Purchase'
+import Login from './pages/platform/Login'
+import Register from './pages/platform/Register'
+import Profile from './pages/platform/Profile'
+import UserList from './pages/admin/UserList'
+import UserEdit from './pages/admin/UserEdit'
+import FormationsAdmin from './pages/admin/FormationsAdmin'
+import FormationEdit from './pages/admin/FormationEdit'
+import Purchase from './pages/Purchase'
 import NotFound from './pages/404'
-import Header from './components/Header'
+import Header from './components/navigation/Header'
 import Container from './components/Container'
 import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
@@ -26,29 +26,27 @@ const App = () => {
     <div>
       <Header />
       <Switch>
-        <Container>
-          <Route exact path='/' component={Home} />
-          <Route path='/login' component={Login} />
-          <Route path='/register' component={Register} />
-          <Route path='/profile' component={Profile} />
-          <Route path='/admin/formation-list' component={FormationsAdmin} />
-          <Route path='/admin/formations/:id/edit' component={FormationEdit} />
-          <Route path='/admin/user-list' component={UserList} />
-          <Route path='/admin/users/:id/edit' component={UserEdit} />
-          <Route path='/404' component={NotFound} />
-          <Route path='/about' component={About} />
-          <Route path='/formations' exact component={Formations} />
-          <Route path='/formations/:id' component={Formation} />
-          <Route
-            path='/purchase'
-            render={() => (
-              <Elements stripe={stripePromise}>
-                <Purchase />
-              </Elements>
-            )}
-          />
-          <Route path='*' component={NotFound} />
-        </Container>
+        <Route exact path='/' component={Home} />
+        <Route path='/login' component={Login} />
+        <Route path='/register' component={Register} />
+        <Route path='/profile' component={Profile} />
+        <Route path='/admin/formation-list' component={FormationsAdmin} />
+        <Route path='/admin/formations/:id/edit' component={FormationEdit} />
+        <Route path='/admin/user-list' component={UserList} />
+        <Route path='/admin/users/:id/edit' component={UserEdit} />
+        <Route path='/404' component={NotFound} />
+        <Route path='/about' component={About} />
+        <Route path='/formations' exact component={Formations} />
+        <Route path='/formations/:id' component={Formation} />
+        <Route
+          path='/purchase'
+          render={() => (
+            <Elements stripe={stripePromise}>
+              <Purchase />
+            </Elements>
+          )}
+        />
+        <Route path='*' component={NotFound} />
       </Switch>
     </div>
   )

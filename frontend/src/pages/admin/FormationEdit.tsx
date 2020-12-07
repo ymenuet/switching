@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
   getFormationDetails,
   updateFormation,
-} from '../actions/formationActions'
-import FormContainer from './FormContainer'
-import { FORMATION_UPDATE_RESET } from '../constants/formationConstants'
+} from '../../actions/formationActions'
+import FormContainer from '../../components/FormContainer'
+import { FORMATION_UPDATE_RESET } from '../../constants/formationConstants'
 import axios from 'axios'
 // import { FORMATION_UPDATE_RESET } from '../constants/formationConstants'
 

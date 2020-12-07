@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { register } from '../actions/userActions'
-import FormContainer from './FormContainer'
+import { register } from '../../actions/userActions'
+import FormContainer from '../../components/FormContainer'
+import Notification from '../../components/UI/Notification'
 
 const Register = (props: any) => {
   const [firstName, setFirstName] = useState('')
@@ -60,8 +61,16 @@ const Register = (props: any) => {
   return (
     <FormContainer>
       <h1>Sign Up</h1>
-      {message && <p>{message}</p>}
-      {error && <p>{JSON.stringify(error)}</p>}
+      {message && (
+        <Notification type='success' message1='Bravo!' message2={message} />
+      )}
+      {error && (
+        <Notification
+          type='warning'
+          message1='Erreur! Lisez les détails ci-dessous:'
+          message2={error}
+        />
+      )}
       {loading && <p>Loading</p>}
       <form onSubmit={submitHandler}>
         <div>

@@ -2,7 +2,8 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { listFormations } from '../actions/formationActions.js'
 import { Link } from 'react-router-dom'
-import classes from './Formations.module.css'
+import Container from '../components/Container'
+import classes from '../styles/Formations.module.css'
 
 const Formations = () => {
   const dispatch = useDispatch()
@@ -15,12 +16,9 @@ const Formations = () => {
   }, [dispatch])
 
   return (
-    <>
-      <h1>formations</h1>
-      <ul>
-        <li>Fetch courses from mongoDB (only promotional stuff)</li>
-        <li>Ability to view individual formation (popup or fake page)</li>
-      </ul>
+    <Container>
+      <h1 className='text-center my-4'>Formations</h1>
+
       {loading ? (
         <h1>Loading</h1>
       ) : error ? (
@@ -34,19 +32,21 @@ const Formations = () => {
                 <p>Description: {formation.shortDescription}</p>
                 <p>Difficulté: {formation.difficulty}</p>
                 <p>Prix: $ {formation.price}</p>
-                <img src={formation.logo} alt={formation.logo} />
-                <img
-                  src={formation.backgroundImage}
-                  alt={formation.backgroundImage}
-                />
-                <img src={formation.thumbnail} alt={formation.thumbnail} />
+                <div className={classes.FormationImgs}>
+                  <img src={formation.logo} alt={formation.logo} />
+                  <img
+                    src={formation.backgroundImage}
+                    alt={formation.backgroundImage}
+                  />
+                  <img src={formation.thumbnail} alt={formation.thumbnail} />
+                </div>
                 <Link to='/purchase'>Je me lance</Link>
               </div>
             )
           })}
         </p>
       )}
-    </>
+    </Container>
   )
 }
 

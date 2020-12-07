@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { getUserDetails, updateUserProfile } from '../actions/userActions'
+import { getUserDetails, updateUserProfile } from '../../actions/userActions'
 import { useDispatch, useSelector } from 'react-redux'
-import FormContainer from './FormContainer'
+import FormContainer from '../../components/FormContainer'
+import Notification from '../../components/UI/Notification'
 
 const Profile = (props: any) => {
   const [firstName, setFirstName] = useState('')
@@ -73,10 +74,18 @@ const Profile = (props: any) => {
 
   return (
     <FormContainer>
-      <h1>My Profile </h1>
-      {error && <p>{JSON.stringify(error)}</p>}
+      <h1>Update My Profile</h1>
       {loading && <p>Loading</p>}
-      {success ? 'success' : JSON.stringify(success)}
+      {success && (
+        <Notification type='info' message1='Success' message2={message} />
+      )}
+      {error && (
+        <Notification
+          type='info'
+          message1='Erreur! Lisez les détails ci-dessous:'
+          message2={message}
+        />
+      )}
       <form onSubmit={submitHandler}>
         <div>
           <label htmlFor=''>First Name</label>
