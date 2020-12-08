@@ -43,6 +43,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
       avatar: user.avatar,
       residentialAddress: user.residentialAddress,
       phoneNumber: user.phoneNumber,
+      formations: user.formations,
     })
   } else {
     res.status(404)
@@ -221,6 +222,19 @@ const checkIfUserExists = asyncHandler(async (req, res) => {
   }
 })
 
+// @desc      Get user formations
+// @route     GET api/users/:id/formations
+// @access    Private
+const getUserFormations = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id).select('-password')
+  if (user) {
+    res.json(user.formations)
+  } else {
+    res.status(404)
+    throw new Error('User not found')
+  }
+})
+
 export {
   authUser,
   registerUser,
@@ -231,4 +245,5 @@ export {
   getUserById,
   updateUser,
   checkIfUserExists,
+  getUserFormations,
 }

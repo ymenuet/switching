@@ -20,8 +20,6 @@ import { loadStripe } from '@stripe/stripe-js'
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PK!)
 
 const App = () => {
-  console.log('api key frontend:', process.env.REACT_APP_STRIPE_PK)
-
   return (
     <div>
       <Header />

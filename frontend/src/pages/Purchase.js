@@ -7,6 +7,7 @@ import FormContainer from '../components/FormContainer'
 import { register } from '../actions/userActions'
 import { useDebouncedCallback } from 'use-debounce'
 import Notification from '../components/UI/Notification'
+import { purchaseFormation } from '../actions/purchaseActions.js'
 
 const Purchase = () => {
   const dispatch = useDispatch()
@@ -31,6 +32,13 @@ const Purchase = () => {
     error: userRegisterError,
     userInfo: userSuccessInfo,
   } = userRegister
+
+  const formationPurchase = useSelector((state: any) => state.formationPurchase)
+  const {
+    loading: loadingPurchase,
+    error: errorPurchase,
+    success: successPurchase,
+  } = formationPurchase
 
   const { userInfo } = userLogin
 
@@ -71,8 +79,6 @@ const Purchase = () => {
       if (password !== confirmPassword) {
         setMessage('Passwords do not match')
       } else {
-        console.log(email)
-        console.log(password)
         dispatch(register('', '', '', '', '', '', email, password)).then(() =>
           handlePay()
         )
@@ -84,44 +90,22 @@ const Purchase = () => {
     if (!stripe || !elements) {
       return
     }
-
-    const { data: clientSecret } = await axios.post('/api/payments', {
-      amount: parseInt(chosenFormation.price) * 100,
-      email: email,
-      formationId: chosenFormation._id,
-      password: password,
-      confirmPassword: confirmPassword,
-    })
-
     const cardElement = elements.getElement(CardElement)
-
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
-      type: 'card',
-      card: cardElement,
-      billing_details: {
-        name: 'bob',
+    dispatch(
+      purchaseFormation(stripe, cardElement, {
+        amount: parseInt(chosenFormation.price) * 100,
         email: email,
-      },
-    })
-    if (error) {
-      console.log('the error is ', error)
-      setPaymentError(error.message)
-    }
-    try {
-      await stripe.confirmCardPayment(clientSecret, {
-        payment_method: paymentMethod.id,
+        formation: chosenFormation,
+        password: password,
+        confirmPassword: confirmPassword,
       })
-      next()
-    } catch (err) {
-      console.log('another error is', err)
-    }
+    )
+    // next()
   }
 
   useEffect(() => {
     dispatch(listFormations())
   }, [dispatch])
-
-  console.log(chosenFormation)
 
   const userForm = userInfo ? (
     <Notification
@@ -173,17 +157,17 @@ const Purchase = () => {
       ) : (
         <select
           name='formation'
-          id='formation'
+          id='formations'
           value={chosenFormation.title}
-          onChange={(e) =>
+          onChange={(e) => {
             setChosenFormation(
-              formations.find((f) => (f.title = e.target.value))
+              formations.find((f) => f.title === e.target.value)
             )
-          }
+          }}
         >
           {formations.map((formation) => {
             return (
-              <option key={formation.id} value={formation.title}>
+              <option key={Math.random()} value={formation.title}>
                 {`${formation.title} (${formation.price}€)`}
               </option>
             )
@@ -245,6 +229,24 @@ const Purchase = () => {
 
   return (
     <FormContainer>
+      {loadingPurchase && (
+        <Notification
+          type='info'
+          message1={`Purchase loading: ${loadingPurchase}`}
+        />
+      )}
+      {errorPurchase && (
+        <Notification
+          type='danger'
+          message1={`Purchase error: ${errorPurchase}`}
+        />
+      )}
+      {successPurchase && (
+        <Notification
+          type='success'
+          message1={`Purchase success! ${successPurchase}`}
+        />
+      )}
       <h1 className='text-center mb-4'>Je me lance</h1>
       {message}
       {userRegisterError}

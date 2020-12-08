@@ -24,7 +24,7 @@ const Formations = () => {
       ) : error ? (
         <h3>Error</h3>
       ) : (
-        <p>
+        <>
           {formations.map((formation: any) => {
             return (
               <div className={classes.Formation}>
@@ -44,7 +44,7 @@ const Formations = () => {
               </div>
             )
           })}
-        </p>
+        </>
       )}
     </Container>
   )
