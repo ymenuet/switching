@@ -66,7 +66,7 @@ const Contact = () => {
               >
                 {formations.map((formation: any) => {
                   return (
-                    <option key={formation.id} value={formation.title}>
+                    <option key={formation} value={formation.title}>
                       {formation.title}
                     </option>
                   )

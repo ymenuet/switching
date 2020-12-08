@@ -10,6 +10,7 @@ import {
   getUserById,
   updateUser,
   checkIfUserExists,
+  getUserFormations,
 } from '../controllers/usersController.js'
 import { protect, mustBeAdmin } from '../middleware/authMiddleware.js'
 
@@ -25,5 +26,6 @@ router
   .get(protect, mustBeAdmin, getUserById)
   .put(protect, mustBeAdmin, updateUser)
 router.route('/emails/:email').get(checkIfUserExists)
+router.route('/:id/formations').get(getUserFormations)
 
 export default router

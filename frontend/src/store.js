@@ -17,6 +17,7 @@ import {
   userDeleteReducer,
   userUpdateReducer,
 } from './reducers/userReducers'
+import { purchaseFormationReducer } from './reducers/purchaseReducers'
 
 const reducer = combineReducers({
   formationList: formationListReducer,
@@ -31,6 +32,7 @@ const reducer = combineReducers({
   userList: userListReducer,
   userDelete: userDeleteReducer,
   userUpdate: userUpdateReducer,
+  formationPurchase: purchaseFormationReducer,
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo')
@@ -39,7 +41,7 @@ const userInfoFromStorage = localStorage.getItem('userInfo')
 
 const initialState = {
   userLogin: { userInfo: userInfoFromStorage },
-  userDetails: { test: 'testy' },
+  // userDetails: { test: 'testy' },
 }
 
 const middleware = [thunk]
