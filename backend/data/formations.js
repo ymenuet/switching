@@ -11,6 +11,26 @@ const formations = [
     demoVideo: 'www.test.com',
     price: 49.99,
     difficulty: 2,
+    videos: [
+      {
+        id: 1,
+        title: 'The video',
+        description: 'the description',
+        url: 'https://player.vimeo.com/video/485087260',
+      },
+      {
+        id: 2,
+        title: 'The video 2',
+        description: 'the description',
+        url: 'https://player.vimeo.com/video/485086655',
+      },
+      {
+        id: 3,
+        title: 'The video 3',
+        description: 'the description',
+        url: 'https://player.vimeo.com/video/485086115',
+      },
+    ],
   },
   {
     title: 'HTML pour les débutants',

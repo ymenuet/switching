@@ -1,5 +1,6 @@
 import asyncHandler from 'express-async-handler'
 import User from '../models/User.js'
+import Formation from '../models/Formation.js'
 import generateToken from '../utils/generateToken.js'
 
 // @desc      Auth user & get token
@@ -32,6 +33,7 @@ const authUser = asyncHandler(async (req, res) => {
 // @access    Private
 const getUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id)
+  console.log(req.user._id)
   if (user) {
     res.json({
       _id: user._id,
@@ -223,15 +225,19 @@ const checkIfUserExists = asyncHandler(async (req, res) => {
 })
 
 // @desc      Get user formations
-// @route     GET api/users/:id/formations
+// @route     GET api/users/formations
 // @access    Private
 const getUserFormations = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.params.id).select('-password')
-  if (user) {
-    res.json(user.formations)
-  } else {
-    res.status(404)
-    throw new Error('User not found')
+  try {
+    const formations = await Promise.all(
+      req.user.formations.map(async (id) => {
+        const formation = await Formation.findById(id)
+        return formation
+      })
+    )
+    res.json(formations)
+  } catch (err) {
+    res.status(500).json(err.message)
   }
 })
 

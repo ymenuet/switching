@@ -38,6 +38,7 @@ const formationSchema = mongoose.Schema(
       type: Number,
       required: true,
     },
+    videos: [mongoose.Schema.Types.Mixed],
   },
   {
     timestamps: true,

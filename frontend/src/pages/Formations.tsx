@@ -40,6 +40,7 @@ const Formations = () => {
                   />
                   <img src={formation.thumbnail} alt={formation.thumbnail} />
                 </div>
+
                 <Link to='/purchase'>Je me lance</Link>
               </div>
             )
