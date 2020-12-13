@@ -23,7 +23,6 @@ const checkFileType = (file, callback) => {
   )
   const validMimetype = filetypes.test(file.mimetype)
   if (validExtensionName && validMimetype) {
-    console.log('iz ok')
     return callback(null, true)
   } else {
     callback('JPG/JPEG/PNG images only!')
@@ -33,15 +32,11 @@ const checkFileType = (file, callback) => {
 const upload = multer({
   storage,
   fileFilter: (req, file, callback) => {
-    console.log('checkingn')
     checkFileType(file, callback)
   },
 })
 
 router.post('/', upload.single('image'), (req, res) => {
-  console.log(res)
-  console.log(req)
-  console.log('hi')
   res.send(`/${req.file.path}`)
 })
 

@@ -26,10 +26,8 @@ router.route('/').post(
         // If not, create a user with that email
 
         const user = await User.findOne({ email: req.body.email })
-        console.log(req.body)
 
         if (user) {
-          // console.log(req.body.formation)
           await user.formations.push(req.body.formation)
           await user.save()
         } else {
@@ -41,7 +39,6 @@ router.route('/').post(
         // If user doesn't exist, form that will ask for more info to finish creating account.
         // Then, both kind of users would be able to access same platform
       } catch (err) {
-        console.log(err.message)
         res.status(500).json({ statusCode: 500, message: err.message })
       }
     } else {

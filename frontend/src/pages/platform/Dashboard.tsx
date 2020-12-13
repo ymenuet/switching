@@ -11,7 +11,6 @@ const Dashboard = () => {
 
   useEffect(() => {
     dispatch(getUserFormations())
-    console.log(formations)
   }, [])
   return (
     <div>
