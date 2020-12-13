@@ -18,6 +18,8 @@
 
 ### Phase 4 - Secure platform access
 
-📍 now
+✅ done
 
 ### Phase 5 - Frontend design
+
+📍 now
