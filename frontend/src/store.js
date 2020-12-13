@@ -16,6 +16,7 @@ import {
   userListReducer,
   userDeleteReducer,
   userUpdateReducer,
+  userFormationsReducer,
 } from './reducers/userReducers'
 import { purchaseFormationReducer } from './reducers/purchaseReducers'
 
@@ -33,6 +34,7 @@ const reducer = combineReducers({
   userDelete: userDeleteReducer,
   userUpdate: userUpdateReducer,
   formationPurchase: purchaseFormationReducer,
+  userFormations: userFormationsReducer,
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo')
