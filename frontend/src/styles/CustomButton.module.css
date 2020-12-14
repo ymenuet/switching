@@ -1,0 +1,28 @@
+.CustomButton {
+  border-radius: 40px;
+  padding: 6px 16px;
+  transition: 0.2s;
+  background: none;
+}
+
+.Success {
+  color: white;
+  border: 1px solid #5ec36e;
+  background-color: #5ec36e;
+}
+
+.Success:hover {
+  background-color: #6fda81;
+  border: 1px solid #6fda81;
+}
+
+.Secondary {
+  color: #2b3142;
+  border: 1px solid #2b3142;
+  background-color: none;
+}
+
+.Secondary:hover {
+  background-color: #2b3142;
+  color: white;
+}

@@ -17,3 +17,9 @@
   margin: 0 20px;
   text-transform: uppercase;
 }
+
+@media (max-width: 900px) {
+  .NavLinks {
+    display: none;
+  }
+}
