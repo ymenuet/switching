@@ -1,6 +1,7 @@
 body {
   margin: 0;
   background-color: rgb(241, 246, 249);
+  overflow-x: hidden;
 }
 * {
   box-sizing: border-box;
@@ -20,9 +21,6 @@ a {
   box-sizing: border-box;
   font-family: 'Avenir';
   color: #2b3142;
-}
-
-a {
   text-decoration: none;
   /* color: #2b3142; */
   transition: 0.1s;
@@ -30,4 +28,20 @@ a {
 
 a:hover {
   color: #53b7ba !important;
+}
+
+.btn-success {
+  border-radius: 40px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  background-color: #5ec36e;
+  border: 1px solid #5ec36e;
+}
+.btn-success a {
+  color: white !important;
+  margin-left: 4px;
+}
+
+#dropdown-split-basic {
+  padding-right: 12px;
 }
