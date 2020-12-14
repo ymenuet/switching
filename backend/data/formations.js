@@ -51,7 +51,7 @@ const formations = [
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras laoreet orci vel laoreet suscipit. Interdum et malesuada fames ac ante ipsum primis in faucibus.',
     longDescription:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras laoreet orci vel laoreet suscipit. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam quis risus volutpat, varius ex id, aliquam dolor. Donec ornare nulla nunc, sed suscipit est tincidunt a. Duis nibh eros, sollicitudin sed massa vel, pellentesque placerat augue. Duis quis nisl sit amet quam sollicitudin congue. Mauris vestibulum velit ut diam condimentum volutpat. Sed pretium est tellus, vel rhoncus risus aliquam sed. Maecenas est lectus, cursus a mollis et, mattis mollis urna.',
-    logo: '/uploads/sample/sample/sample-logo.png',
+    logo: '/uploads/sample/sample-logo.png',
     backgroundImage: '/uploads/sample/sample-background-image.png',
     thumbnail: '/uploads/image-1605671541763.jpg',
     demoVideo: 'placeholder',

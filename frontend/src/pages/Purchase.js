@@ -69,7 +69,7 @@ const Purchase = () => {
     if (userInfo) {
       setEmail(userInfo.email)
     }
-  }, [email])
+  }, [email, debounced, purchasePhase, userInfo])
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -225,6 +225,8 @@ const Purchase = () => {
       break
     case 3:
       currentScreen = Thanks
+    default:
+      break
   }
 
   return (

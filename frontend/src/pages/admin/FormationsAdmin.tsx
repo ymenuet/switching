@@ -110,11 +110,10 @@ const FormationList = (props: any) => {
                     <Link to={`/admin/formations/${formation._id}/edit`}>
                       <button>Edit</button>
                     </Link>
-                    <Link>
-                      <button onClick={() => deleteHandler(formation._id)}>
-                        Delete
-                      </button>
-                    </Link>
+
+                    <button onClick={() => deleteHandler(formation._id)}>
+                      Delete
+                    </button>
                   </td>
                 </tr>
               )

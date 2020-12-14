@@ -27,7 +27,7 @@ const Formations = () => {
         <>
           {formations.map((formation: any) => {
             return (
-              <div className={classes.Formation}>
+              <div className={classes.Formation} key={formation._id}>
                 <h3>{formation.title}</h3>
                 <p>Description: {formation.shortDescription}</p>
                 <p>Difficulté: {formation.difficulty}</p>

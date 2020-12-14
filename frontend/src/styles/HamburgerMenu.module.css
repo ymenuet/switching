@@ -37,10 +37,12 @@
   width: 100vw;
   background-color: rgba(0, 0, 0, 0.66);
   overflow: hidden;
+  transition: 0.3s opacity;
 }
 
 .BackdropHide {
-  display: none;
+  opacity: 0;
+  pointer-events: none;
 }
 
 @media (min-width: 900px) {

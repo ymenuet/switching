@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import classes from '../../styles/HamburgerMenu.module.css'
 import Hamburger from '../../images/hamburger.png'
-import { Button } from 'react-bootstrap'
 import { NavLink } from 'react-router-dom'
 
 import CustomButton from '../UI/CustomButton'
@@ -11,9 +10,7 @@ const HamburgerMenu = ({ userInfo, logoutHandler }) => {
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar)
   }
-  useEffect(() => {
-    console.log(showSidebar)
-  }, [showSidebar])
+
   return (
     <div className={classes.HamburgerMenu}>
       <img src={Hamburger} alt='hamburger menu' onClick={toggleSidebar} />

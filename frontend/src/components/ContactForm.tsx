@@ -9,7 +9,7 @@ const Contact = () => {
   const dispatch = useDispatch()
 
   const formationList = useSelector((state: any) => state.formationList)
-  const { loading, error, formations } = formationList
+  const { loading, formations } = formationList
 
   const [chosenFormation, setChosenFormation] = useState('')
   const [firstName, setFirstName] = useState('')
@@ -66,7 +66,7 @@ const Contact = () => {
               >
                 {formations.map((formation: any) => {
                   return (
-                    <option key={formation} value={formation.title}>
+                    <option key={formation._id} value={formation.title}>
                       {formation.title}
                     </option>
                   )
@@ -129,14 +129,14 @@ const Contact = () => {
           <button type='submit' onClick={sendContactEmail}>
             Prendre un rendez-vous
           </button>
-          {emailStatus.type == 'success' && (
+          {emailStatus.type === 'success' && (
             <Notification
               type='success'
               message1="Merci d'avoir pris contact!"
               message2='Nous vous répondrons dans les meilleurs délais.'
             />
           )}
-          {emailStatus.type == 'fail' && (
+          {emailStatus.type === 'fail' && (
             <Notification
               type='warning'
               message1='Désolé, une erreur est survenue. Contactez info@switching directement pour nous joindre.'

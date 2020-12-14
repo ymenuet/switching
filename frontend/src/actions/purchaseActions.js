@@ -14,9 +14,6 @@ export const purchaseFormation = (stripe, cardElement, bill) => async (
     dispatch({
       type: PURCHASE_FORMATION_REQUEST,
     })
-    const {
-      userLogin: { userInfo },
-    } = getState()
 
     const { data: clientSecret } = await axios.post('/api/payments', {
       amount: bill.amount,

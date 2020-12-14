@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../../actions/userActions'
 import Logo from '../../images/logo-text.png'
 import classes from '../../styles/Header.module.css'
-import { Button, Dropdown, ButtonGroup } from 'react-bootstrap'
+import { Button, Dropdown, ButtonGroup, Nav } from 'react-bootstrap'
 import CustomButton from '../UI/CustomButton'
 import HamburgerMenu from '../UI/HamburgerMenu'
 
@@ -50,27 +50,27 @@ const Header = () => {
                 id='dropdown-split-basic'
               />
               <Dropdown.Menu>
-                <Dropdown.Item>
-                  <NavLink to='/profile'>Mon Profil</NavLink>
-                </Dropdown.Item>
-                <Dropdown.Item>
-                  <NavLink to='/mes-cours'>Mes formations</NavLink>
-                </Dropdown.Item>
-                <Dropdown.Item>
-                  <NavLink to='/purchase'>Ajouter une formation</NavLink>
-                </Dropdown.Item>
+                <Nav.Link as={NavLink} to='/profile'>
+                  Mon Profil
+                </Nav.Link>
+
+                <Nav.Link as={NavLink} to='/mes-cours'>
+                  Mes formations
+                </Nav.Link>
+
+                <Nav.Link as={NavLink} to='/purchase'>
+                  Ajouter une formation
+                </Nav.Link>
+
                 {userInfo.isAdmin && (
                   <>
-                    <Dropdown.Item>
-                      <NavLink to='/admin/user-list'>
-                        Gestion des utilisateurs
-                      </NavLink>
-                    </Dropdown.Item>
-                    <Dropdown.Item>
-                      <NavLink to='/admin/formation-list'>
-                        Gestion des Formations
-                      </NavLink>
-                    </Dropdown.Item>
+                    <Nav.Link as={NavLink} to='/admin/user-list'>
+                      Gestion des utilisateurs
+                    </Nav.Link>
+
+                    <Nav.Link as={NavLink} to='/admin/formation-list'>
+                      Gestion des Formations
+                    </Nav.Link>
 
                     <Dropdown.Divider />
                   </>

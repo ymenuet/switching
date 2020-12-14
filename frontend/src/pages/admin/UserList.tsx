@@ -60,11 +60,10 @@ const UserList = (props: any) => {
                     <Link to={`/admin/users/${user._id}/edit`}>
                       <button>Edit</button>
                     </Link>
-                    <Link>
-                      <button onClick={() => deleteHandler(user._id)}>
-                        Delete
-                      </button>
-                    </Link>
+
+                    <button onClick={() => deleteHandler(user._id)}>
+                      Delete
+                    </button>
                   </td>
                 </tr>
               )
