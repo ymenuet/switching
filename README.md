@@ -23,3 +23,7 @@
 ### Phase 5 - Frontend design
 
 📍 now
+
+- Correct warnings
+- Unify js/ts
+- Better component structure and naming
