@@ -8,23 +8,23 @@ import {
 import { FORMATION_CREATE_RESET } from '../../constants/formationConstants'
 import { Link } from 'react-router-dom'
 
-const FormationList = (props: any) => {
+const FormationList = (props) => {
   const dispatch = useDispatch()
 
-  const formationList = useSelector((state: any) => state.formationList)
+  const formationList = useSelector((state) => state.formationList)
   const { loading, error, formations } = formationList
 
-  const userLogin = useSelector((state: any) => state.userLogin)
+  const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
 
-  const formationDelete = useSelector((state: any) => state.formationDelete)
+  const formationDelete = useSelector((state) => state.formationDelete)
   const {
     loading: loadingDelete,
     error: errorDelete,
     success: successDelete,
   } = formationDelete
 
-  const formationCreate = useSelector((state: any) => state.formationCreate)
+  const formationCreate = useSelector((state) => state.formationCreate)
   const {
     loading: loadingCreate,
     error: errorCreate,
@@ -52,7 +52,7 @@ const FormationList = (props: any) => {
     createdFormation,
   ])
 
-  const deleteHandler = (id: any) => {
+  const deleteHandler = (id) => {
     if (window.confirm('Are you sure?')) {
       dispatch(deleteFormation(id))
     }
@@ -90,7 +90,7 @@ const FormationList = (props: any) => {
             </tr>
           </thead>
           <tbody>
-            {formations?.map((formation: any) => {
+            {formations?.map((formation) => {
               return (
                 <tr key={formation._id}>
                   <td>{formation._id}</td>

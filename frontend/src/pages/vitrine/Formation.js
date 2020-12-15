@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getFormationDetails } from '../actions/formationActions'
+import { getFormationDetails } from '../../actions/formationActions'
 
-const Formation = (props: any) => {
+const Formation = (props) => {
   const dispatch = useDispatch()
 
-  const formationDetails = useSelector((state: any) => state.formationDetails)
+  const formationDetails = useSelector((state) => state.formationDetails)
   const { loading, error, formation } = formationDetails
 
   useEffect(() => {

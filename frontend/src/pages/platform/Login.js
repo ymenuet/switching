@@ -5,17 +5,17 @@ import { login } from '../../actions/userActions'
 import FormContainer from '../../components/FormContainer'
 import Notification from '../../components/UI/Notification'
 
-const Login = (props: any) => {
+const Login = (props) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
   const dispatch = useDispatch()
-  const userLogin = useSelector((state: any) => state.userLogin)
+  const userLogin = useSelector((state) => state.userLogin)
   const { loading, error, userInfo } = userLogin
   const redirect = props.location.search
     ? props.location.search.split('=')[1]
     : '/'
-  const submitHandler = (e: any) => {
+  const submitHandler = (e) => {
     e.preventDefault()
     dispatch(login(email, password))
   }

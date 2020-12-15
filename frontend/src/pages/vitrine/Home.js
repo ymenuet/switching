@@ -1,7 +1,7 @@
 import React from 'react'
-import ContactForm from '../components/ContactForm'
-import classes from '../styles/Home.module.scss'
-import Button from '../components/UI/Button'
+import ContactForm from '../../components/ContactForm'
+import classes from '../../styles/Home.module.scss'
+import Button from '../../components/UI/Button'
 
 const Home = () => {
   return (

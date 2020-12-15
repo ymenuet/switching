@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js'
 import { useDispatch, useSelector } from 'react-redux'
-import { listFormations } from '../actions/formationActions.js'
-import FormContainer from '../components/FormContainer'
-import { register } from '../actions/userActions'
+import { listFormations } from '../../actions/formationActions.js'
+import FormContainer from '../../components/FormContainer'
+import { register } from '../../actions/userActions'
 import { useDebouncedCallback } from 'use-debounce'
-import Notification from '../components/UI/Notification'
-import { purchaseFormation } from '../actions/purchaseActions.js'
+import Notification from '../../components/UI/Notification'
+import { purchaseFormation } from '../../actions/purchaseActions.js'
 
 const Purchase = () => {
   const dispatch = useDispatch()
@@ -33,7 +33,7 @@ const Purchase = () => {
     userInfo: userSuccessInfo,
   } = userRegister
 
-  const formationPurchase = useSelector((state: any) => state.formationPurchase)
+  const formationPurchase = useSelector((state) => state.formationPurchase)
   const {
     loading: loadingPurchase,
     error: errorPurchase,

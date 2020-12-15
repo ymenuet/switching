@@ -10,7 +10,7 @@ import HamburgerMenu from '../UI/HamburgerMenu'
 
 const Header = () => {
   const dispatch = useDispatch()
-  const userLogin = useSelector((state: any) => state.userLogin)
+  const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
   const logoutHandler = () => {
     dispatch(logout())

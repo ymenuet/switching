@@ -3,16 +3,16 @@ import { useDispatch, useSelector } from 'react-redux'
 import { listUsers, deleteUser } from '../../actions/userActions'
 import { Link } from 'react-router-dom'
 
-const UserList = (props: any) => {
+const UserList = (props) => {
   const dispatch = useDispatch()
 
-  const userList = useSelector((state: any) => state.userList)
+  const userList = useSelector((state) => state.userList)
   const { loading, error, users } = userList
 
-  const userLogin = useSelector((state: any) => state.userLogin)
+  const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
 
-  const userDelete = useSelector((state: any) => state.userDelete)
+  const userDelete = useSelector((state) => state.userDelete)
   const { success: successDelete } = userDelete
 
   useEffect(() => {
@@ -24,7 +24,7 @@ const UserList = (props: any) => {
     dispatch(listUsers())
   }, [dispatch, props.history, successDelete, userInfo])
 
-  const deleteHandler = (id: any) => {
+  const deleteHandler = (id) => {
     if (window.confirm('Are you sure?')) {
       dispatch(deleteUser(id))
     }
@@ -48,7 +48,7 @@ const UserList = (props: any) => {
             </tr>
           </thead>
           <tbody>
-            {users?.map((user: any) => {
+            {users?.map((user) => {
               return (
                 <tr key={user._id}>
                   <td>{user._id}</td>

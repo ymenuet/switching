@@ -10,7 +10,7 @@ import { FORMATION_UPDATE_RESET } from '../../constants/formationConstants'
 import axios from 'axios'
 // import { FORMATION_UPDATE_RESET } from '../constants/formationConstants'
 
-const FormationEdit = (props: any) => {
+const FormationEdit = (props) => {
   const formationId = props.match.params.id
 
   const [title, setTitle] = useState('')
@@ -28,10 +28,10 @@ const FormationEdit = (props: any) => {
 
   const dispatch = useDispatch()
 
-  const formationDetails = useSelector((state: any) => state.formationDetails)
+  const formationDetails = useSelector((state) => state.formationDetails)
   const { loading, error, formation } = formationDetails
 
-  const formationUpdate = useSelector((state: any) => state.formationUpdate)
+  const formationUpdate = useSelector((state) => state.formationUpdate)
   const {
     loading: loadingUpdate,
     error: errorUpdate,
@@ -61,7 +61,7 @@ const FormationEdit = (props: any) => {
     }
   }, [dispatch, formationId, props.history, formation, successUpdate])
 
-  const submitHandler = (e: any) => {
+  const submitHandler = (e) => {
     e.preventDefault()
     dispatch(
       updateFormation({
@@ -79,7 +79,7 @@ const FormationEdit = (props: any) => {
     )
   }
 
-  const uploadFileHandler = async (e: any) => {
+  const uploadFileHandler = async (e) => {
     const file = e.target.files[0]
     const imgKind = e.target.id
     const formData = new FormData()

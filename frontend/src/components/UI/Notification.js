@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Notification = (props: any) => {
+const Notification = (props) => {
   return (
     <div className={`my-3 alert alert-${props.type}`} role='alert'>
       <h4 className='alert-heading'>{props.title}</h4>

@@ -5,7 +5,7 @@ import { getUserDetails, updateUser } from '../../actions/userActions'
 import FormContainer from '../../components/FormContainer'
 import { USER_UPDATE_RESET } from '../../constants/userConstants'
 
-const UserEdit = (props: any) => {
+const UserEdit = (props) => {
   const userId = props.match.params.id
 
   const [isAdmin, setIsAdmin] = useState(false)
@@ -25,17 +25,17 @@ const UserEdit = (props: any) => {
 
   const dispatch = useDispatch()
 
-  const userDetails = useSelector((state: any) => state.userDetails)
+  const userDetails = useSelector((state) => state.userDetails)
   const { loading, error, user } = userDetails
 
-  const userUpdate = useSelector((state: any) => state.userUpdate)
+  const userUpdate = useSelector((state) => state.userUpdate)
   const {
     loading: loadingUpdate,
     error: errorUpdate,
     success: successUpdate,
   } = userUpdate
 
-  const submitHandler = (e: any) => {
+  const submitHandler = (e) => {
     e.preventDefault()
     dispatch(
       updateUser({

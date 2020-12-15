@@ -5,7 +5,7 @@ import { getUserFormations } from '../../actions/userActions'
 
 const Dashboard = () => {
   const { loading, data: formations } = useSelector(
-    (state: any) => state.userFormations
+    (state) => state.userFormations
   )
   const dispatch = useDispatch()
 
@@ -17,7 +17,7 @@ const Dashboard = () => {
       <h1 className='py-4 text-center'>Mes cours</h1>
       <>
         {formations &&
-          formations.map((formation: any) => {
+          formations.map((formation) => {
             return (
               <div className={classes.Formation} key={formation._id}>
                 <h3>{formation.title}</h3>
@@ -30,7 +30,7 @@ const Dashboard = () => {
                     alt={formation.backgroundImage}
                   />
                   <img src={formation.thumbnail} alt={formation.thumbnail} />
-                  {formation.videos.map((video: any) => {
+                  {formation.videos.map((video) => {
                     return (
                       <div>
                         <iframe

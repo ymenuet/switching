@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { listFormations } from '../actions/formationActions.js'
+import { listFormations } from '../../actions/formationActions.js'
 import { Link } from 'react-router-dom'
-import Container from '../components/Container'
-import classes from '../styles/Formations.module.css'
+import Container from '../../components/Container'
+import classes from '../../styles/Formations.module.css'
 
 const Formations = () => {
   const dispatch = useDispatch()
 
-  const formationList = useSelector((state: any) => state.formationList)
+  const formationList = useSelector((state) => state.formationList)
   const { loading, error, formations } = formationList
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const Formations = () => {
         <h3>Error</h3>
       ) : (
         <>
-          {formations.map((formation: any) => {
+          {formations.map((formation) => {
             return (
               <div className={classes.Formation} key={formation._id}>
                 <h3>{formation.title}</h3>

@@ -8,7 +8,7 @@ import { listFormations } from '../actions/formationActions.js'
 const Contact = () => {
   const dispatch = useDispatch()
 
-  const formationList = useSelector((state: any) => state.formationList)
+  const formationList = useSelector((state) => state.formationList)
   const { loading, formations } = formationList
 
   const [chosenFormation, setChosenFormation] = useState('')
@@ -62,9 +62,9 @@ const Contact = () => {
                 name='formation'
                 id='formation'
                 value={chosenFormation}
-                onChange={(e: any) => setChosenFormation(e.target.value)}
+                onChange={(e) => setChosenFormation(e.target.value)}
               >
-                {formations.map((formation: any) => {
+                {formations.map((formation) => {
                   return (
                     <option key={formation._id} value={formation.title}>
                       {formation.title}
@@ -82,7 +82,7 @@ const Contact = () => {
               type='text'
               value={lastName}
               placeholder='Entrez votre nom'
-              onChange={(e: any) => setLastName(e.target.value)}
+              onChange={(e) => setLastName(e.target.value)}
             />
           </div>
 
@@ -92,7 +92,7 @@ const Contact = () => {
               type='text'
               value={firstName}
               placeholder='Entez votre nom de famille'
-              onChange={(e: any) => setFirstName(e.target.value)}
+              onChange={(e) => setFirstName(e.target.value)}
             />
           </div>
 
@@ -102,7 +102,7 @@ const Contact = () => {
               type='email'
               value={email}
               placeholder='Entez votre addresse email'
-              onChange={(e: any) => setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
 
@@ -112,7 +112,7 @@ const Contact = () => {
               type='phone'
               value={phone}
               placeholder='Entez votre numéro de téléphone'
-              onChange={(e: any) => setPhone(e.target.value)}
+              onChange={(e) => setPhone(e.target.value)}
             />
           </div>
 
@@ -122,7 +122,7 @@ const Contact = () => {
               type='date'
               value={appointmentDate}
               placeholder='Entez la date de rendez-vous'
-              onChange={(e: any) => setAppointmentDate(e.target.value)}
+              onChange={(e) => setAppointmentDate(e.target.value)}
             />
           </div>
 
